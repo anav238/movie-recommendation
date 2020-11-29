@@ -1,0 +1,20 @@
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\bin\Debug\netcoreapp3.1\movie recommendation.exe
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\bin\Debug\netcoreapp3.1\movie recommendation.deps.json
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\bin\Debug\netcoreapp3.1\movie recommendation.runtimeconfig.json
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\bin\Debug\netcoreapp3.1\movie recommendation.runtimeconfig.dev.json
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\bin\Debug\netcoreapp3.1\movie recommendation.dll
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\bin\Debug\netcoreapp3.1\movie recommendation.pdb
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\obj\Debug\netcoreapp3.1\movie recommendation.csprojAssemblyReference.cache
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\obj\Debug\netcoreapp3.1\movie recommendation.AssemblyInfoInputs.cache
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\obj\Debug\netcoreapp3.1\movie recommendation.AssemblyInfo.cs
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\obj\Debug\netcoreapp3.1\movie recommendation.csproj.CoreCompileInputs.cache
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\obj\Debug\netcoreapp3.1\movie recommendation.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\obj\Debug\netcoreapp3.1\staticwebassets\movie recommendation.StaticWebAssets.Manifest.cache
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\obj\Debug\netcoreapp3.1\staticwebassets\movie recommendation.StaticWebAssets.xml
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\obj\Debug\netcoreapp3.1\scopedcss\bundle\movie recommendation.styles.css
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\obj\Debug\netcoreapp3.1\movie recommendation.RazorTargetAssemblyInfo.cache
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\obj\Debug\netcoreapp3.1\movie recommendation.dll
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\obj\Debug\netcoreapp3.1\movie recommendation.pdb
+C:\Users\ana\Desktop\movie recommendation\movie recommendation\obj\Debug\netcoreapp3.1\movie recommendation.genruntimeconfig.cache
