@@ -79,3 +79,64 @@ C:\Users\ana\Desktop\movie recommendation\project\obj\Debug\netcoreapp3.1\movie 
 C:\Users\ana\Desktop\movie recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.dll
 C:\Users\ana\Desktop\movie recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.pdb
 C:\Users\ana\Desktop\movie recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.genruntimeconfig.cache
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\appsettings.json
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\movie recommendation.exe
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\movie recommendation.deps.json
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\movie recommendation.runtimeconfig.json
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\movie recommendation.runtimeconfig.dev.json
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\movie recommendation.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\movie recommendation.pdb
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Humanizer.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.Data.Sqlite.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Sqlite.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\SQLitePCLRaw.batteries_v2.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\SQLitePCLRaw.nativelibrary.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\SQLitePCLRaw.core.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\SQLitePCLRaw.provider.dynamic_cdecl.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\System.ComponentModel.Annotations.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\alpine-x64\native\libe_sqlite3.so
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\linux-arm\native\libe_sqlite3.so
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\linux-arm64\native\libe_sqlite3.so
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\linux-armel\native\libe_sqlite3.so
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\linux-mips64\native\libe_sqlite3.so
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\linux-musl-x64\native\libe_sqlite3.so
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libe_sqlite3.so
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\linux-x86\native\libe_sqlite3.so
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\libe_sqlite3.dylib
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\e_sqlite3.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\e_sqlite3.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
+D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.csprojAssemblyReference.cache
+D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.AssemblyInfoInputs.cache
+D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.AssemblyInfo.cs
+D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.csproj.CoreCompileInputs.cache
+D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.MvcApplicationPartsAssemblyInfo.cache
+D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.RazorTargetAssemblyInfo.cache
+D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.csproj.CopyComplete
+D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\staticwebassets\movie recommendation.StaticWebAssets.Manifest.cache
+D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\staticwebassets\movie recommendation.StaticWebAssets.xml
+D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.dll
+D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.pdb
+D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.genruntimeconfig.cache
