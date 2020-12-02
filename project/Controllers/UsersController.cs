@@ -21,17 +21,17 @@ namespace movie_recommendation.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public  ActionResult<IEnumerable<User>> GetUsers()
+        public ActionResult<IEnumerable<User>> GetUsers()
         {
             return _repository.GetAll().ToList();
         }
 
         // GET: api/Users/5
-        
+
         [HttpGet("{id}")]
-        public  ActionResult<User> GetById(int id)
+        public ActionResult<User> GetById(int id)
         {
-            var user =  _repository.GetById(id);
+            var user = _repository.GetById(id);
 
             if (user == null)
             {
@@ -41,17 +41,28 @@ namespace movie_recommendation.Controllers
             return user;
         }
 
-        
+
 
         // POST: api/Users
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public ActionResult<User> PostUser(User user)
+        public ActionResult<User> Create([FromBody] User user)
         {
             _repository.Create(user);
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            return CreatedAtAction("GetById", new { id = user.Id }, user);
         }
+
+        [HttpPut("{id}")]
+        public ActionResult<User> Update(int id, [FromBody] User user)
+        {
+            if (id != user.Id)
+                return BadRequest();
+            else
+                _repository.Update(user);
+            return Ok();
+        }
+
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]

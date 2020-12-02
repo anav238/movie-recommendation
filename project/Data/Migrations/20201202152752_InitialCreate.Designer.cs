@@ -9,7 +9,7 @@ using movie_recommendation.Data;
 namespace movie_recommendation.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201201142420_InitialCreate")]
+    [Migration("20201202152752_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
