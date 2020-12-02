@@ -11,6 +11,11 @@ namespace movie_recommendation.Entities
 
         public string Password { get; set; }
 
-        public DateTime DateCreated { get; set; } 
+        public DateTime DateCreated { get; set; }
+
+        public User()
+        {
+            this.DateCreated = DateTime.Now;
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace movie_recommendation.Data.Migrations
     public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
-        {   
+        {
             migrationBuilder.CreateTable(
                 name: "Friendships",
                 columns: table => new

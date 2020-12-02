@@ -128,7 +128,6 @@ D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\
 D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\e_sqlite3.dll
 D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
 D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
-D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.csprojAssemblyReference.cache
 D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.AssemblyInfoInputs.cache
 D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.AssemblyInfo.cs
 D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.RazorTargetAssemblyInfo.cache
@@ -233,3 +232,4 @@ D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcore
 D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.csproj.CoreCompileInputs.cache
 D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.MvcApplicationPartsAssemblyInfo.cache
+D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.csprojAssemblyReference.cache

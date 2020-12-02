@@ -62,26 +62,22 @@ namespace movie_recommendation.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public ActionResult<Friendship> Create(Friendship friendship)
+        public ActionResult<Friendship> Create([FromBody] Friendship friendship)
         {
-
             try
             {
                 _repository.Create(friendship);
             }
-            catch (DbUpdateException)
+            catch (Exception)
             {
                 if (_repository.GetFriendship(friendship.UserId_1, friendship.UserId_2) != null)
-                {
-                    return Conflict();
-                }
+                  return  Conflict();
                 else
-                {
                     throw;
-                }
             }
-
-            return CreatedAtAction("GetFriendship", new { id = friendship.UserId_1 }, friendship);
+            
+           
+            return CreatedAtAction("GetFriendship", new { id_1 = friendship.UserId_1, id_2 = friendship.UserId_2 }, friendship);
         }
 
         // DELETE: api/Friendships/5/5
