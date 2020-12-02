@@ -29,7 +29,9 @@ namespace movie_recommendation
 
             });
 
+            services.AddScoped<IFriendshipRepository, FriendshipRepository>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
             services.AddControllers();
         }
 
