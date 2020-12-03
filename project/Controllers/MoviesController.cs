@@ -39,7 +39,7 @@ namespace movie_recommendation.Controllers
 
         // GET: api/Movies
         [HttpPost]
-        public IActionResult CreateMovie(Movie movie)
+        public IActionResult CreateMovie([FromBody] Movie movie)
         {
             _repository.Create(movie);
             return CreatedAtAction(nameof(GetById), new { id = movie.Id }, movie);
@@ -63,7 +63,7 @@ namespace movie_recommendation.Controllers
 
         // PUT: api/Movies/{id}
         [HttpPut("{id}")]
-        public IActionResult UpdateMovie(int id, Movie movie)
+        public IActionResult UpdateMovie(int id, [FromBody] Movie movie)
         {
 
             if (id != movie.Id)
