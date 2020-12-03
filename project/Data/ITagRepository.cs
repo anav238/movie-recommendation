@@ -5,6 +5,7 @@ namespace movie_recommendation.Data
 {
     public interface ITagRepository
     {
+        Tag GetById(int id);
         void Create(Tag tag);
         IEnumerable<Tag> GetAll();
         IEnumerable<Tag> GetTags(int movieId);

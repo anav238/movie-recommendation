@@ -11,16 +11,18 @@ namespace movie_recommendation.Entities
     {
         [Key]
         [Column(Order = 1)]
+        public int id { get; set; }
+
+        [Column(Order = 2)]
         public int userId { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
+        [Column(Order = 3)]
         public int movieId { get; set; }
 
-        [Column(Order = 3)]
+        [Column(Order = 4)]
         public String tag { get; set; }
 
-        [Column(Order = 4)]
+        [Column(Order = 5)]
         public DateTime timestamp { get; set; }
     }
 }

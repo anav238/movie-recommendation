@@ -20,6 +20,11 @@ namespace movie_recommendation.Data
             return _context.Tags.ToList();
         }
 
+        public Tag GetById(int id)
+        {
+            return _context.Tags.Find(id);
+        }
+
         public IEnumerable<Tag> GetTags(int movieId)
         {
             return _context.Tags.ToList()
