@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\bin\\Debug",
+    "\\obj\\Debug",
+    "\\obj\\Release"
   ],
-  "SelectedNode": "\\movie recommendation.sln",
+  "SelectedNode": "\\appsettings.Development.json",
   "PreviewInSolutionExplorer": false
 }

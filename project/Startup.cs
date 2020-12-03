@@ -26,9 +26,12 @@ namespace movie_recommendation
              services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
+
             });
 
+            services.AddScoped<IFriendshipRepository, FriendshipRepository>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
             services.AddControllers();
         }
 
