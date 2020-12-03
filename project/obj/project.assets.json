@@ -8699,23 +8699,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Marian\\.nuget\\packages\\": {},
+    "C:\\Users\\home-pc\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\movie-recommendation\\project\\movie recommendation.csproj",
+      "projectUniqueName": "C:\\Users\\home-pc\\Desktop\\movie-recommendation\\project\\movie recommendation.csproj",
       "projectName": "movie recommendation",
-      "projectPath": "D:\\movie-recommendation\\project\\movie recommendation.csproj",
-      "packagesPath": "C:\\Users\\Marian\\.nuget\\packages\\",
-      "outputPath": "D:\\movie-recommendation\\project\\obj\\",
+      "projectPath": "C:\\Users\\home-pc\\Desktop\\movie-recommendation\\project\\movie recommendation.csproj",
+      "packagesPath": "C:\\Users\\home-pc\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\home-pc\\Desktop\\movie-recommendation\\project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Marian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\home-pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
