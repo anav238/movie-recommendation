@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ana\\Desktop\\movie recommendation\\project\\movie recommendation.csproj": {}
+    "D:\\movie-recommendation\\project\\movie recommendation.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ana\\Desktop\\movie recommendation\\project\\movie recommendation.csproj": {
+    "D:\\movie-recommendation\\project\\movie recommendation.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ana\\Desktop\\movie recommendation\\project\\movie recommendation.csproj",
+        "projectUniqueName": "D:\\movie-recommendation\\project\\movie recommendation.csproj",
         "projectName": "movie recommendation",
-        "projectPath": "C:\\Users\\ana\\Desktop\\movie recommendation\\project\\movie recommendation.csproj",
-        "packagesPath": "C:\\Users\\ana\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ana\\Desktop\\movie recommendation\\project\\obj\\",
+        "projectPath": "D:\\movie-recommendation\\project\\movie recommendation.csproj",
+        "packagesPath": "C:\\Users\\Marian\\.nuget\\packages\\",
+        "outputPath": "D:\\movie-recommendation\\project\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\ana\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Marian\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +29,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -38,7 +40,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -50,9 +51,23 @@
               "target": "Package",
               "version": "[5.0.0, )"
             },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.10, )"
+            },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.10, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.4, )"
             }
           },
           "imports": [
@@ -73,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
