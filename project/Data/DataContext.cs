@@ -11,11 +11,14 @@ namespace movie_recommendation.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Friendship>()
                 .HasKey(friendship => new { friendship.UserId_1, friendship.UserId_2 });
+            modelBuilder.Entity<Rating>()
+                .HasKey(rating => new { rating.userId, rating.movieId });
             base.OnModelCreating(modelBuilder);
         }
     }
