@@ -14,14 +14,15 @@ namespace movie_recommendation.Data
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Tag> Tags { get; set; }
 
+        public DbSet<Movie> Movies { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Friendship>()
                 .HasKey(friendship => new { friendship.UserId_1, friendship.UserId_2 });
             modelBuilder.Entity<Rating>()
                 .HasKey(rating => new { rating.userId, rating.movieId });
-            modelBuilder.Entity<Tag>()
-                .HasKey(tag => new { tag.userId, tag.movieId });
+            
             base.OnModelCreating(modelBuilder);
         }
     }
