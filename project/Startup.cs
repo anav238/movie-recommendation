@@ -30,6 +30,8 @@ namespace movie_recommendation
             });
 
             services.AddScoped<IFriendshipRepository, FriendshipRepository>();
+            services.AddScoped<IRatingRepository, RatingRepository>();
+            services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddControllers();

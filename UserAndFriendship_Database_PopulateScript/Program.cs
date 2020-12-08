@@ -39,7 +39,7 @@ namespace UserAndFriendship_Database_PopulateScript
                 cmd.CommandText = "INSERT INTO Users(Id,Username,Password,DateCreated) " +
                 "VALUES(@Id,@Username,@Password,@DateCreated)";
                 cmd.Parameters.AddWithValue("@Id", i);
-                cmd.Parameters.AddWithValue("@Username", Faker.Internet.UserName());
+                cmd.Parameters.AddWithValue("@Username", i.ToString() + Faker.Internet.UserName());
                 cmd.Parameters.AddWithValue("@Password", program.CreatePassword(8));
                 cmd.Parameters.AddWithValue("@DateCreated", DateTime.Now);
 

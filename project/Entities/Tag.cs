@@ -23,6 +23,6 @@ namespace movie_recommendation.Entities
         public String tag { get; set; }
 
         [Column(Order = 5)]
-        public DateTime timestamp { get; set; }
+        public string timestamp { get; set; }
     }
 }

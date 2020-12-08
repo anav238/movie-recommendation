@@ -27,13 +27,14 @@ namespace movie_recommendation.Data
 
         public IEnumerable<Tag> GetTags(int movieId)
         {
-            return _context.Tags.ToList()
-                .Where(tag => tag.movieId == movieId);
+            return _context.Tags
+                .Where(tag => tag.movieId == movieId).ToList();
         }
 
         public Tag GetTag(int userId, int movieId)
         {
-            return _context.Tags.Find(userId, movieId);
+            return _context.Tags.FirstOrDefault(tag => (tag.userId == userId && tag.movieId == movieId));
+                
         }
 
         public void Create(Tag tag)

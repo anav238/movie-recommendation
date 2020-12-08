@@ -29,7 +29,7 @@ namespace movie_recommendation.Controllers
         }
 
         // GET: api/Tags/5
-        [HttpGet("{id}")]
+        [HttpGet("{movieId}")]
         public ActionResult<IEnumerable<Tag>> GetTags(int movieId)
         {
             var tag = _repository.GetTags(movieId).ToList();
