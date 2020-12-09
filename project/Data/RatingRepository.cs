@@ -26,6 +26,12 @@ namespace movie_recommendation.Data
                 .Where(rating => rating.movieId == movieId);
         }
 
+        public IEnumerable<Rating> GetUserRatings(int userId)
+        {
+            return _context.Ratings.ToList()
+                .Where(rating => rating.userId == userId);
+        }
+
         public Rating GetRating(int userId, int movieId)
         {
             return _context.Ratings.Find(userId, movieId);

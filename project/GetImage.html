@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Using TheMovieDB</title>
+    <meta name="viewport" content="width=device-width">
+    
+</head>
+<body>
+    <h1>Using TheMovieDB.org API v3</h1>
+    <p><img src="http://image.tmdb.org/t/p/w500/4ZocdxnOO6q2UbdKye2wgofLFhB.jpg" alt="Jaws"/></p>
+    <div id="output">
+       
+    </div>
+    
+    <script src="./js/key.js"></script>
+    <script>
+       
+        let baseURL = 'https://api.themoviedb.org/3/';
+        let configData = null;
+        let baseImageURL = null;
+        
+        let getConfig = function () {
+            let url = "".concat(baseURL, 'configuration?api_key=', '684e74556adcb4fe60b7c3b4399540ff'); 
+            fetch(url)
+            .then((result)=>{
+                return result.json();
+            })
+            .then((data)=>{
+                baseImageURL = data.images.secure_base_url;
+                configData = data.images;
+                console.log('config:', data);
+                console.log('config fetched');
+                runSearch('jaws')
+            })
+            .catch(function(err){
+                alert(err);
+            });
+        }
+        
+        let runSearch = function (keyword) {
+            let url = ''.concat(baseURL, 'search/movie?api_key=', '684e74556adcb4fe60b7c3b4399540ff', '&query=', keyword);
+            fetch(url)
+            .then(result=>result.json())
+            .then((data)=>{
+                document.getElementById('output').innerHTML = JSON.stringify(data, null, 4);
+                
+            })
+        }
+        
+        document.addEventListener('DOMContentLoaded', getConfig);
+        
+    </script>
+</body>
+</html>

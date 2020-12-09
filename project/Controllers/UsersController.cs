@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using movie_recommendation.Data;
 using movie_recommendation.Entities;
 
+using Microsoft.ML;
+using Microsoft.Extensions.ML;
+
 namespace movie_recommendation.Controllers
 {
     [Route("api/[controller]")]
@@ -18,6 +21,8 @@ namespace movie_recommendation.Controllers
         {
             _repository = repository;
         }
+
+       
 
         // GET: api/Users
         [HttpGet]

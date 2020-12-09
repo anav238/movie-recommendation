@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using movie_recommendation.Data;
+using Microsoft.Extensions.ML;
+using movie_recommendation.Entities;
 
 namespace movie_recommendation
 {
@@ -28,6 +30,8 @@ namespace movie_recommendation
                 options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
 
             });
+
+            services.AddPredictionEnginePool<Entities.Rating, RatingPrediction>().FromFile(_config["MLModelPath"]);
 
             services.AddScoped<IFriendshipRepository, FriendshipRepository>();
             services.AddScoped<IRatingRepository, RatingRepository>();
