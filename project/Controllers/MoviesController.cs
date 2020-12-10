@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using movie_recommendation.Data;
 using movie_recommendation.Entities;
@@ -29,6 +30,7 @@ namespace movie_recommendation.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Movie>> GetMovies(int page = 1, int pageSize = 100) => _repository.GetAll(page, pageSize).ToList();
 
+        [Authorize]
         // GET: api/Movies/{id}
         [HttpGet("{id}", Name = "GetById")]
         public ActionResult<Movie> GetById(int id)

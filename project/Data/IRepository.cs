@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using movie_recommendation.Entities;
+using System.Collections.Generic;
 
 namespace movie_recommendation
 {
@@ -12,5 +13,7 @@ namespace movie_recommendation
         void Update(T entity);
 
         void Remove(T entity);
+
+        public User Authenticate(string username, string password);
     }
 }
