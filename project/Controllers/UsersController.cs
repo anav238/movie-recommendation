@@ -1,6 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using movie_recommendation.Data;
 using movie_recommendation.Entities;
 
@@ -80,6 +85,35 @@ namespace movie_recommendation.Controllers
         {
             _repository.Create(user);
             return CreatedAtAction("GetById", new { id = user.Id }, user);
+        }
+
+        [HttpPost("authenticate")]
+        public ActionResult<User> Authenticate([FromBody] User user)
+        {
+            var user_log = _repository.Authenticate(user.Username, user.Password);
+            if (user_log == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("My-Top-Secret-Password");
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddHours(6),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+
+            return Ok(new
+            {
+                Id = user_log.Id,
+                Username = user_log.Username,
+                Token = tokenString
+            });
         }
 
         [HttpPut("{id}")]
