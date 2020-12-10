@@ -248,6 +248,8 @@ main section ul li img.poster {
   border-radius: 8px;
   margin-bottom: 15px;
   box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: auto;
 }
 main section ul li h3 {
   margin: 0 0 4px 0;
@@ -263,4 +265,27 @@ footer {
   opacity: 0.8;
   margin: 120px 0 20px 0;
   text-align: center;
+}
+
+@media only screen and (max-width: 1499px) {
+  .container {
+    max-width: 1200px;
+  }
+  header img.poster {
+    width: 275px;
+  }
+  main section ul li {
+    width: 190px;
+  }
+}
+@media only screen and (max-width: 1299px) {
+  .container {
+    max-width: 1000px;
+  }
+  header img.poster {
+    width: 250px;
+  }
+  main section ul li {
+    width: 150px;
+  }
 }
