@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using movie_recommendation.Entities;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace movie_recommendation.Data
@@ -24,6 +25,23 @@ namespace movie_recommendation.Data
         public T GetById(int id)
         {
             return _context.Set<T>().Find(id);
+        }
+
+        public User Authenticate(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                return null;
+
+            var user = _context.Users.SingleOrDefault(x => x.Username == username);
+
+            if (user == null)
+                return null;
+
+            if (password != user.Password)
+                return null;
+
+            // authentication successful
+            return user;
         }
 
         public void Remove(T entity)
