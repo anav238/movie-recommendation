@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace movie_recommendation.Data
 {
@@ -18,9 +16,9 @@ namespace movie_recommendation.Data
             _context.SaveChanges();
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(int page, int pageSize)
         {
-            return _context.Set<T>().AsEnumerable();
+            return _context.Set<T>().Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
         }
 
         public T GetById(int id)

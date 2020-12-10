@@ -360,3 +360,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+project/movierecommendationapp.db
+project/obj/Debug/netcoreapp3.1/movie recommendation.csproj.CoreCompileInputs.cache
+*.cache

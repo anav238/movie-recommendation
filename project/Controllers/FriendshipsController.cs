@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using movie_recommendation.Data;
 using movie_recommendation.Entities;
 
@@ -23,16 +20,16 @@ namespace movie_recommendation.Controllers
 
         // GET: api/Friendships
         [HttpGet]
-        public ActionResult<IEnumerable<Friendship>> GetFriendships()
+        public ActionResult<IEnumerable<Friendship>> GetFriendships(int page=1 , int pageSize=100)
         {
-            return _repository.GetAll().ToList();
+            return _repository.GetAll(page, pageSize).ToList();
         }
 
         // GET: api/Friendships/5
         [HttpGet("{id}")]
-        public ActionResult<IEnumerable<Friendship>> GetFriends(int id)
+        public ActionResult<IEnumerable<Friendship>> GetFriends(int id, int page = 1, int pageSize=100)
         {
-            var friendship = _repository.GetFriends(id).ToList();
+            var friendship = _repository.GetFriends(id,page, pageSize).ToList();
 
             if (friendship == null)
             {
