@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using movie_recommendation.Data;
 using movie_recommendation.Entities;
 
 namespace movie_recommendation.Controllers
@@ -13,15 +14,20 @@ namespace movie_recommendation.Controllers
     public class MoviesController : ControllerBase
     {
         private readonly IRepository<Movie> _repository;
+        private readonly IMovieRepository _movieRepository;
 
-        public MoviesController(IRepository<Movie> repository)
+        
+
+        public MoviesController(IRepository<Movie> repository, IMovieRepository movieRepository)
         {
             _repository = repository;
+            _movieRepository = movieRepository;
         }
+
 
         // GET: api/Movies
         [HttpGet]
-        public ActionResult<IEnumerable<Movie>> GetMovies() => _repository.GetAll().ToList();
+        public ActionResult<IEnumerable<Movie>> GetMovies(int page = 1, int pageSize = 100) => _repository.GetAll(page, pageSize).ToList();
 
         // GET: api/Movies/{id}
         [HttpGet("{id}", Name = "GetById")]
@@ -36,6 +42,31 @@ namespace movie_recommendation.Controllers
 
             return movie;
         }
+
+        [HttpGet("{movieId}/rating")]
+        public ActionResult<object> GetMovieRating(int movieId)
+        {
+            return _movieRepository.GetMovieRating(movieId);
+        }
+
+        [HttpGet("{movieId}/ratings")]
+        public ActionResult<IEnumerable<Rating>> GetMovieRatings(int movieId, int page = 1, int pageSize = 100)
+        {
+            return _movieRepository.GetMovieRatings(movieId, page, pageSize).ToList();
+        }
+
+        [HttpGet("{movieId}/tags")]
+        public ActionResult<IEnumerable<Tag>> GetMovieTags(int movieId, int page = 1, int pageSize = 100)
+        {
+            return _movieRepository.GetMovieTags(movieId, page, pageSize).ToList();
+        }
+
+        [HttpGet("genre={genre}")]
+        public ActionResult<IEnumerable<Movie>> GetMoviesByGenre(string genre, int page = 1, int pageSize = 100)
+        {   
+            return _movieRepository.GetMoviesByGenre(genre, page, pageSize).ToList();
+        }
+
 
         // GET: api/Movies
         [HttpPost]

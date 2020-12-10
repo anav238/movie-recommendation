@@ -1,8 +1,6 @@
 ﻿using movie_recommendation.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace movie_recommendation.Data
 {
@@ -15,16 +13,18 @@ namespace movie_recommendation.Data
             _context = context;
         }
 
-        public IEnumerable<Rating> GetAll()
+        public IEnumerable<Rating> GetAll(int page, int pageSize)
         {
-            return _context.Ratings.ToList();
+            return _context.Ratings.Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
 
-        public IEnumerable<Rating> GetRatings(int movieId)
+        public IEnumerable<Rating> GetRatings(int movieId, int page, int pageSize)
         {
-            return _context.Ratings.ToList()
-                .Where(rating => rating.movieId == movieId);
+            return _context.Ratings
+                .Where(rating => rating.movieId == movieId).Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
+
+       
 
         public Rating GetRating(int userId, int movieId)
         {

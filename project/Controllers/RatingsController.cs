@@ -20,16 +20,16 @@ namespace movie_recommendation.Controllers
 
         // GET: api/Ratings
         [HttpGet]
-        public ActionResult<IEnumerable<Rating>> GetRatings()
+        public ActionResult<IEnumerable<Rating>> GetRatings(int page=1, int pageSize = 100)
         {
-            return _repository.GetAll().ToList();
+            return _repository.GetAll(page,pageSize).ToList();
         }
 
         // GET: api/Ratings/5
-        [HttpGet("{id}")]
-        public ActionResult<IEnumerable<Rating>> GetRatings(int movieId)
+        [HttpGet("{movieId}")]
+        public ActionResult<IEnumerable<Rating>> GetRatings(int movieId, int page=1, int pageSize=100)
         {
-            var rating = _repository.GetRatings(movieId).ToList();
+            var rating = _repository.GetRatings(movieId, page, pageSize).ToList();
 
             if (rating == null)
             {

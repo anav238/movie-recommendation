@@ -1,8 +1,6 @@
 ﻿using movie_recommendation.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace movie_recommendation.Data
 {
@@ -15,15 +13,15 @@ namespace movie_recommendation.Data
             _context = context;
         }
 
-        public IEnumerable<Friendship> GetAll()
+        public IEnumerable<Friendship> GetAll(int page, int pageSize)
         {
-            return _context.Friendships.ToList();
+            return _context.Friendships.Skip((page-1) * pageSize).Take(pageSize).ToList();
         }
 
-        public IEnumerable<Friendship> GetFriends(int id)
+        public IEnumerable<Friendship> GetFriends(int id, int page, int pageSize)
         {
-            return _context.Friendships.ToList()
-                .Where(friendship => friendship.UserId_1 == id);
+            return _context.Friendships
+                .Where(friendship => friendship.UserId_1 == id).Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
 
         public Friendship GetFriendship(int id_1, int id_2)
