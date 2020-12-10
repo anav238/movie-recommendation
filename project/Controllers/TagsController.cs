@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using movie_recommendation.Data;
 using movie_recommendation.Entities;
 
@@ -23,16 +20,16 @@ namespace movie_recommendation.Controllers
 
         // GET: api/Tags
         [HttpGet]
-        public ActionResult<IEnumerable<Tag>> GetTags()
+        public ActionResult<IEnumerable<Tag>> GetTags(int page=1, int pageSize=100)
         {
-            return _repository.GetAll().ToList();
+            return _repository.GetAll(page, pageSize).ToList();
         }
 
         // GET: api/Tags/5
         [HttpGet("{movieId}")]
-        public ActionResult<IEnumerable<Tag>> GetTags(int movieId)
+        public ActionResult<IEnumerable<Tag>> GetTags(int movieId, int page = 1, int pageSize = 100)
         {
-            var tag = _repository.GetTags(movieId).ToList();
+            var tag = _repository.GetTags(movieId, page, pageSize).ToList();
 
             if (tag == null)
             {

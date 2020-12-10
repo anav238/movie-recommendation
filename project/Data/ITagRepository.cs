@@ -7,8 +7,8 @@ namespace movie_recommendation.Data
     {
         Tag GetById(int id);
         void Create(Tag tag);
-        IEnumerable<Tag> GetAll();
-        IEnumerable<Tag> GetTags(int movieId);
+        IEnumerable<Tag> GetAll(int page, int pageSize);
+        IEnumerable<Tag> GetTags(int movieId, int page, int pageSize);
         Tag GetTag(int userId, int movieId);
         void Remove(Tag tag);
         void Update(Tag tag);
