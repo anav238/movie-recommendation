@@ -1,0 +1,266 @@
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/icons/MaterialIcons-Regular.eot);
+  src: local('Material Icons'),
+    local('MaterialIcons-Regular'),
+    url(../fonts/icons/MaterialIcons-Regular.woff2) format('woff2'),
+    url(../fonts/icons/MaterialIcons-Regular.woff) format('woff'),
+    url(../fonts/icons/MaterialIcons-Regular.ttf) format('truetype');
+}
+.i {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga';
+}
+.i.ii {
+  padding-right: 6px;
+}
+body {
+  font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  min-width: 100%;
+  position: absolute;
+  background-color: #E5E5E5;
+}
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+header {
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.0)), linear-gradient(180deg, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.45)), url('https://image.tmdb.org/t/p/original/zMrk2G3XsnfYKiIp1NEfdtvDyBH.jpg');
+  background-size: cover;
+  background-position: center;
+} 
+nav {
+  position: fixed;
+  width: 100%;
+  color: #fff;
+  height: 85px;
+  display: flex;
+  z-index: 2;
+  transition: background 200ms linear;
+}
+nav.scrolled {
+  background: rgba(0, 0, 0, 0.9);
+}
+nav .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+}
+nav .container h1.title {
+  text-transform: uppercase;
+  border: 3px solid #fff;
+  padding: 12px;
+  margin: 0;
+  line-height: 1;
+  font-weight: 700;
+}
+nav .container ul.links {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+nav .container ul.links li {
+  display: inline-flex;
+}
+nav .container ul.links li + li {
+  margin-left: 30px;
+}
+header img.poster {
+  width: 300px;
+  border-radius: 10px;
+  margin-right: 40px;
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
+}
+nav + * {
+  padding-top: 100px;
+}
+header > .container { 
+  padding: 30px 0 160px 0;
+  display: flex;
+  color: #fff;
+}
+header > .container .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+header > .container .info .info-main .info-main-title * {
+  font-size: 45px;
+  margin: 0;
+  display: inline;
+  line-height: 1;
+}
+header > .container .info .info-main .info-main-title h1 {
+  font-weight: 700;
+}
+header > .container .info .info-main .info-main-title span {
+  font-weight: 400;
+  opacity: 0.7;
+}
+header > .container .info .info-main .info-main-data {
+  margin-top: 10px;
+  line-height: 1;
+}
+header > .container .info .info-main .info-main-data span + span {
+  margin-left: 8px;
+}
+header > .container .info .info-main .info-main-data .match {
+  font-weight: 700;
+  color: #00c853;
+}
+header > .container .info .info-main .info-main-data .certification {
+  padding: 2px 7px 2px 9px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  background-color: #616161;
+  color: #fff;
+  opacity: 0.7;
+}
+header > .container .info .info-main .info-main-data .language {
+  margin-right: 0;
+}
+header > .container .info .info-main .info-main-data .genres,
+header > .container .info .info-main .info-main-data .duration {
+  margin: 0;
+}
+header > .container .info .info-main .info-main-data .genres:before,
+header > .container .info .info-main .info-main-data .duration:before {
+  content: "\2022";
+  margin: 0 6px 0 2px;
+  opacity: 0.7;
+}
+header > .container .info .info-main {
+  margin-bottom: 20px;
+}
+header > .container .info .info-user {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+header > .container .info .info-description {
+  margin-bottom: 25px;
+}
+header > .container .info .info-user a {
+  color: white;
+  display: inline-flex;
+  text-decoration: none;
+  border-radius: 50px;
+  font-size: 14px;
+}
+header > .container .info .info-user a.rating {
+  color: #fbc02d;
+  margin-right: 10px;
+}
+header > .container .info .info-user a.rating .i {
+  font-size: 28px;
+}
+header > .container .info .info-user a .i {
+  font-size: 18px;
+}
+header > .container .info .info-user a + a {
+  padding: 10px 15px;
+  margin-left: 10px;
+}
+header > .container .info .info-user a.button.button-green {
+  background-color: #00600f;
+}
+header > .container .info .info-user a.button.button-gray {
+  background-color: #373737;
+}
+header > .container .info .info-user a.button.button-red {
+  background-color: #9a0007;
+}
+header > .container .info .info-user a.button.button-orange {
+  background-color: #bb4d00;
+}
+header > .container .info .info-user a.button.button-blue {
+  background-color: #004ba0;
+}
+header > .container .info .info-cast {
+  opacity: 0.7;
+}
+main {
+  background-color: #fff;
+  color: #212121;
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  z-index: 1;
+  position: relative;
+}
+main.container.container-main {
+  margin: -100px auto;
+}
+main section {
+  padding: 30px 50px 45px 50px;
+}
+main section h2 {
+  font-size: 40px;
+  margin: 0 0 3px 0;
+}
+main section .description {
+  opacity: 0.85;
+  font-size: 18px;
+}
+main section:first-child {
+  border-radius: 6px 6px 0 0;
+}
+main section:last-child {
+  border-radius: 0 0 6px 6px;
+}
+main section:nth-of-type(even) {
+  background: #f2f2f2;
+}
+main section ul {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0 0 0;
+  padding: 0;
+}
+main section ul li {
+  display: inline-flex;
+  flex-direction: column;
+  text-align: center;
+  width: 220px;
+}
+main section ul li img.poster {
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.2);
+}
+main section ul li h3 {
+  margin: 0 0 4px 0;
+  font-size: 18px;
+  line-height: 1.25;
+}
+main section ul li .rating .i {
+  color: #fbc02d;
+  font-size: 24px;
+}
+footer {
+  color: #212121;
+  opacity: 0.8;
+  margin: 120px 0 20px 0;
+  text-align: center;
+}
