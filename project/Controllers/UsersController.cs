@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using movie_recommendation.Data;
 using movie_recommendation.Entities;
 
@@ -13,18 +11,49 @@ namespace movie_recommendation.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IRepository<User> _repository;
+        private readonly IUserRepository _userRepository;
 
-        public UsersController(IRepository<User> repository)
+
+
+        public UsersController(IRepository<User> repository, IUserRepository userRepository)
         {
             _repository = repository;
+            _userRepository = userRepository;
         }
 
         // GET: api/Users
         [HttpGet]
-        public ActionResult<IEnumerable<User>> GetUsers()
+        public ActionResult<IEnumerable<User>> GetUsers(int page = 1, int pageSize = 100)
         {
-            return _repository.GetAll().ToList();
+            return _repository.GetAll(page, pageSize).ToList();
         }
+
+        [HttpGet("{id}/{friendId}/friendswatching")]
+
+        public ActionResult<IEnumerable<Movie>> GetFriendMovies(int id, int friendId, int page = 1, int pageSize = 100)
+        {
+            var friendship = _userRepository.GetFriendship(id, friendId);
+
+            if (friendship != null)
+                return _userRepository.GetFriendMovies(id, friendId, page, pageSize).ToList();
+            else
+                return NotFound();
+        }
+
+        [HttpGet("{id}/friendswatching")]
+
+        public ActionResult<IEnumerable<Movie>> GetFriendsMovies(int id, int page = 1, int pageSize = 100)
+        {
+            
+                var friendsMovies = _userRepository.GetFriendsMovies(id, page, pageSize).ToList();
+
+            if (friendsMovies.Count() != 0)
+                return friendsMovies;
+            else
+                return NotFound();
+            
+        }
+
 
         // GET: api/Users/5
 

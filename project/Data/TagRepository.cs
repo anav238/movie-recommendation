@@ -1,8 +1,6 @@
 ﻿using movie_recommendation.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace movie_recommendation.Data
 {
@@ -15,9 +13,9 @@ namespace movie_recommendation.Data
             _context = context;
         }
 
-        public IEnumerable<Tag> GetAll()
+        public IEnumerable<Tag> GetAll(int page, int pageSize)
         {
-            return _context.Tags.ToList();
+            return _context.Tags.Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
 
         public Tag GetById(int id)
@@ -25,10 +23,10 @@ namespace movie_recommendation.Data
             return _context.Tags.Find(id);
         }
 
-        public IEnumerable<Tag> GetTags(int movieId)
+        public IEnumerable<Tag> GetTags(int movieId, int page, int pageSize)
         {
             return _context.Tags
-                .Where(tag => tag.movieId == movieId).ToList();
+                .Where(tag => tag.movieId == movieId).Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
 
         public Tag GetTag(int userId, int movieId)

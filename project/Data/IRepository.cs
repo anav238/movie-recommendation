@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace movie_recommendation
 {
     public interface IRepository<T> where T: BaseEntity
     {
         T GetById(int id);
-        IEnumerable<T> GetAll();
+        IEnumerable<T> GetAll(int page, int pageSize);
 
         void Create(T entity);
 

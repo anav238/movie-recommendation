@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using movie_recommendation.Data;
 
 namespace movie_recommendation
@@ -32,6 +30,8 @@ namespace movie_recommendation
             services.AddScoped<IFriendshipRepository, FriendshipRepository>();
             services.AddScoped<IRatingRepository, RatingRepository>();
             services.AddScoped<ITagRepository, TagRepository>();
+            services.AddScoped<IMovieRepository, MovieRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddControllers();
