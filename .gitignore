@@ -403,3 +403,4 @@ project/bin/Debug/netcoreapp3.1/movie recommendation.pdb
 project/obj/Debug/netcoreapp3.1/movie recommendation.assets.cache
 project/obj/Debug/netcoreapp3.1/movie recommendation.assets.cache
 project/obj/Debug/netcoreapp3.1/movie recommendation.csprojAssemblyReference.cache
+project/.vs/movie recommendation/config/applicationhost.config
