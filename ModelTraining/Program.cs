@@ -15,6 +15,7 @@ namespace ModelTraining
         static void Main(string[] args)
         {
             var data = LoadData();
+
             ITransformer model = BuildAndTrainModel(mlContext, data.training);
             EvaluateModel(mlContext, data.test, model);
             UseModelForSinglePrediction(mlContext, model);
@@ -24,17 +25,12 @@ namespace ModelTraining
         public static (IDataView training, IDataView test) LoadData()
         {
             DatabaseLoader loader = mlContext.Data.CreateDatabaseLoader<Rating>();
-            string connectionString = @"Data Source='..\..\..\movierecommendationapp.db'"; //aici ar trebui sa fie ok si cu pathul initial
-            
-            string trainingCommand = "SELECT * FROM Ratings WHERE movieId >= 10";
-            string testingCommand = "SELECT * FROM Ratings WHERE movieId < 10";
-            
-            DatabaseSource dbSourceTraining = new DatabaseSource(SqliteFactory.Instance, connectionString, trainingCommand);
-            DatabaseSource dbSourceTesting = new DatabaseSource(SqliteFactory.Instance, connectionString, testingCommand);
-            IDataView trainingData = loader.Load(dbSourceTraining);
-            IDataView testingData = loader.Load(dbSourceTesting);
-            Console.WriteLine(testingData.ToString());
-            return (trainingData, testingData);
+            string connectionString = @"Data Source='..\..\..\movierecommendationapp.db'";
+            string command = "SELECT * FROM Ratings";
+            DatabaseSource dbSource = new DatabaseSource(SqliteFactory.Instance, connectionString, command);
+            IDataView data = loader.Load(dbSource);
+            DataOperationsCatalog.TrainTestData dataSplit = mlContext.Data.TrainTestSplit(data, testFraction: 0.2);
+            return (dataSplit.TrainSet, dataSplit.TestSet);
         }
 
         public static ITransformer BuildAndTrainModel(MLContext mlContext, IDataView trainingDataView)
@@ -47,7 +43,7 @@ namespace ModelTraining
                 MatrixColumnIndexColumnName = "userIdEncoded",
                 MatrixRowIndexColumnName = "movieIdEncoded",
                 LabelColumnName = "rating",
-                NumberOfIterations = 20,
+                NumberOfIterations = 5000,
                 ApproximationRank = 100
             };
 
