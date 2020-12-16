@@ -171,15 +171,15 @@ header > .container .info .info-description {
   margin-bottom: 25px;
 }
 header > .container .info .info-user a {
-  color: white;
   display: inline-flex;
   text-decoration: none;
   border-radius: 50px;
   font-size: 14px;
 }
 header > .container .info .info-user a.rating {
-  color: #ff9800;
+  color: inherit;
   margin-right: 10px;
+  opacity: 0.7;
 }
 header > .container .info .info-user a.rating .i {
   font-size: 28px;
@@ -192,18 +192,23 @@ header > .container .info .info-user a + a {
   margin-left: 10px;
 }
 header > .container .info .info-user a.button.button-green {
+  color: #fff;
   background-color: #00600f;
 }
 header > .container .info .info-user a.button.button-gray {
+  color: #fff;
   background-color: #373737;
 }
 header > .container .info .info-user a.button.button-red {
+  color: #fff;
   background-color: #9a0007;
 }
 header > .container .info .info-user a.button.button-orange {
+  color: #fff;
   background-color: #bb4d00;
 }
 header > .container .info .info-user a.button.button-blue {
+  color: #fff;
   background-color: #004ba0;
 }
 header > .container .info .info-cast {
@@ -264,8 +269,10 @@ main section ul li h3 {
   font-size: 18px;
   line-height: 1.25;
 }
+main section ul li .rating {
+  opacity: 0.7;
+}
 main section ul li .rating .i {
-  color: #ff9800;
   font-size: 24px;
 }
 footer {
