@@ -43,7 +43,7 @@ body {
   margin: 0 auto;
 }
 header {
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.0)), linear-gradient(180deg, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.45)), url('https://image.tmdb.org/t/p/original/rNYMwtlMCDGpxpQ1nKN96UJgkb7.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5));
   background-size: cover;
   background-position: center;
 } 
@@ -54,10 +54,7 @@ nav {
   height: 85px;
   display: flex;
   z-index: 2;
-  transition: background 200ms linear;
-}
-nav.scrolled {
-  background: rgba(0, 0, 0, 0.9);
+  transition: background 200ms linear, color 200ms linear;
 }
 nav .container {
   display: flex;
@@ -72,6 +69,7 @@ nav .container h1.title {
   margin: 0;
   line-height: 1;
   font-weight: 700;
+  transition: border-color 200ms linear;
 }
 nav .container ul.links {
   display: flex;
@@ -85,6 +83,19 @@ nav .container ul.links li {
 }
 nav .container ul.links li + li {
   margin-left: 30px;
+}
+nav.invert {
+  color: #212121;
+}
+nav.invert .container h1.title {
+  border-color: #212121;
+}
+nav.scrolled {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.9);
+}
+nav.scrolled .container h1.title {
+  border-color: #fff;
 }
 header img.poster {
   width: 300px;
@@ -122,30 +133,27 @@ header > .container .info .info-main .info-main-data {
   margin-top: 10px;
   line-height: 1;
 }
-header > .container .info .info-main .info-main-data span + span {
-  margin-left: 8px;
-}
 header > .container .info .info-main .info-main-data .match {
-  font-weight: 700;
-  color: #00c853;
-}
-header > .container .info .info-main .info-main-data .certification {
+color: #fff;
+  margin-right: 8px;
   padding: 2px 7px 2px 9px;
+  background-color: #388E3C;
   border-radius: 4px;
   font-weight: 500;
   font-size: 14px;
-  background-color: #616161;
-  color: #fff;
-  opacity: 0.7;
 }
 header > .container .info .info-main .info-main-data .language {
-  margin-right: 0;
+  margin: 0;
 }
 header > .container .info .info-main .info-main-data .genres,
 header > .container .info .info-main .info-main-data .duration {
   margin: 0;
 }
-header > .container .info .info-main .info-main-data .genres:before,
+header > .container .info .info-main .info-main-data .language:after {
+  content: "\2022";
+  margin: 0 2px 0 6px;
+  opacity: 0.7;
+}
 header > .container .info .info-main .info-main-data .duration:before {
   content: "\2022";
   margin: 0 6px 0 2px;
@@ -170,7 +178,7 @@ header > .container .info .info-user a {
   font-size: 14px;
 }
 header > .container .info .info-user a.rating {
-  color: #fbc02d;
+  color: #ff9800;
   margin-right: 10px;
 }
 header > .container .info .info-user a.rating .i {
@@ -257,7 +265,7 @@ main section ul li h3 {
   line-height: 1.25;
 }
 main section ul li .rating .i {
-  color: #fbc02d;
+  color: #ff9800;
   font-size: 24px;
 }
 footer {
