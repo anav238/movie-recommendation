@@ -44,7 +44,7 @@ fetch('/api/movies/' + Math.floor(Math.random() * 10000))
                 tmdbData.release_date ? year.innerHTML = "(" + tmdbData.release_date.substring(0, 4) + ")" : year.innerHTML = "(" + data.title.slice(-5).slice(0, -1) + ")";
                 tmdbData.overview ? description.innerHTML = tmdbData.overview : description.remove();
                 tmdbData.spoken_languages && tmdbData.spoken_languages.length ? language.innerHTML = (tmdbData.spoken_languages[0].english_name ? tmdbData.spoken_languages[0].english_name : tmdbData.spoken_languages[0].name) : language.remove();
-                genres.innerHTML = data.genres.replaceAll("|", ", ");
+                (genres !== "(no genres listed)" && genres) ? genres.innerHTML = data.genres.replaceAll("|", ", ") : genres.innerHTML = "<i>no genres listed</i>";
                 tmdbData.runtime ? duration.innerHTML = Math.floor(parseInt(tmdbData.runtime) / 60) + "h " + parseInt(tmdbData.runtime) % 60 + "m" : duration.remove();
 
                 let poster = document.querySelector("header img.poster");
@@ -53,7 +53,7 @@ fetch('/api/movies/' + Math.floor(Math.random() * 10000))
                     poster.src = "http://image.tmdb.org/t/p/w300" + tmdbData.poster_path;
                 }
                 else {
-                    document.querySelector("header > .container").style.padding = "45px 0 160px 0";
+                    document.querySelector("header > .container").style.padding = "45px 0 175px 0";
                     poster.remove();
                 }
 
@@ -72,11 +72,14 @@ fetch('/api/movies/' + Math.floor(Math.random() * 10000))
         fetch(tmdbURL + 'movie/' + data.tmdbId + '/credits?api_key=' + tmdbKey + '&language=en-US')
             .then(tmdbResponse => tmdbResponse.json())
             .then(tmdbData => {
-                if(tmdbData.cast) {
+                if(tmdbData.cast && tmdbData.cast.length) {
                     let cast = document.querySelector("header > .container .info .info-cast .cast");
-                    cast.innerHTML = "Cast: " + tmdbData.cast[0].name + ", " + tmdbData.cast[1].name + ", " + tmdbData.cast[2].name;
+                    let castList = [];
+                    for(let i = 0; i < tmdbData.cast.length && i < 3; i++)
+                        castList.push(tmdbData.cast[i].name);
+                    cast.innerHTML = "Cast: " + castList.join(", ");
                 }
-                if(tmdbData.crew) {
+                if(tmdbData.crew && tmdbData.crew.length) {
                     let director = document.querySelector("header > .container .info .info-cast .director");
                     let directorList = [];
                     for(let i in tmdbData.crew)
@@ -84,7 +87,25 @@ fetch('/api/movies/' + Math.floor(Math.random() * 10000))
                             directorList.push(tmdbData.crew[i].name);
                     director.innerHTML = "Director: " + directorList.join(", ");
                 }
-            })
+            });
+        /*
+        fetch('/api/movies/' + data.id + '/rating')
+            .then(ratingResponse => ratingResponse.json())
+            .then(ratingData => {
+                let ratingStars = document.querySelectorAll("header > .container .info .info-user a.rating .i");
+                if(ratingData.rating >= 1) {
+                    document.querySelector("header > .container .info .info-user a.rating").style.color = "#ff9800";
+                    document.querySelector("header > .container .info .info-user a.rating").style.opacity = 1;
+                    for(let i = 0; i < 5; i++) {
+                        if(i + 1 <= Math.floor(ratingData.rating))
+                            ratingStars[i].innerHTML = "star";
+                        else if(i === Math.floor(ratingData.rating) && ratingData.rating - Math.floor(ratingData.rating) >= 0.5)
+                            ratingStars[i].innerHTML = "star_half";
+                        else
+                            ratingStars[i].innerHTML = "star_outline";
+                    }
+                }
+            });*/
     });
 
 // Top Picks
@@ -103,5 +124,23 @@ fetch('/api/movies?page=' + Math.floor(Math.random() * 2000) + '&pageSize=5')
                         poster.src = "https://image.tmdb.org/t/p/w220_and_h330_face" + tmdbData.poster_path;
                     }
             });
+            /*
+            fetch('/api/movies/' + data[i].id + '/rating')
+                .then(ratingResponse => ratingResponse.json())
+                .then(ratingData => {
+                    let ratingStars = document.querySelectorAll("main section ul li:nth-child(" + (parseInt(i) + 1) + ") .rating .i");
+                    if(ratingData.rating >= 1) {
+                        document.querySelector("main section ul li:nth-child(" + (parseInt(i) + 1) + ") .rating").style.color = "#ff9800";
+                        document.querySelector("main section ul li:nth-child(" + (parseInt(i) + 1) + ") .rating").style.opacity = 1;
+                        for(let i = 0; i < 5; i++) {
+                            if(i + 1 <= Math.floor(ratingData.rating))
+                                ratingStars[i].innerHTML = "star";
+                            else if(i === Math.floor(ratingData.rating) && ratingData.rating - Math.floor(ratingData.rating) >= 0.5)
+                                ratingStars[i].innerHTML = "star_half";
+                            else
+                                ratingStars[i].innerHTML = "star_outline";
+                        }
+                    }
+                });*/
         }
     });
