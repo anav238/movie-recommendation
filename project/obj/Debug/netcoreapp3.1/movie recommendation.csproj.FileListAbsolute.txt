@@ -388,3 +388,4 @@ D:\Google Drive\Facultate\i.net\movie-recommendation\project\obj\Debug\netcoreap
 D:\Google Drive\Facultate\i.net\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.dll
 D:\Google Drive\Facultate\i.net\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.pdb
 D:\Google Drive\Facultate\i.net\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.genruntimeconfig.cache
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll

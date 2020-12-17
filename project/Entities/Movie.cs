@@ -6,5 +6,9 @@
         public string Genres { get; set; }
         public int ImdbId { get; set; }
         public int TmdbId { get; set; }
+
+        public float Rating { get; set; }
+
+        public int NumberOfRatings { get; set; }
     }
 }

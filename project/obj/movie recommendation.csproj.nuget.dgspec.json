@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Google Drive\\Facultate\\i.net\\movie-recommendation\\project\\movie recommendation.csproj": {}
+    "D:\\movie-recommendation\\project\\movie recommendation.csproj": {}
   },
   "projects": {
-    "D:\\Google Drive\\Facultate\\i.net\\movie-recommendation\\project\\movie recommendation.csproj": {
+    "D:\\movie-recommendation\\project\\movie recommendation.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Google Drive\\Facultate\\i.net\\movie-recommendation\\project\\movie recommendation.csproj",
+        "projectUniqueName": "D:\\movie-recommendation\\project\\movie recommendation.csproj",
         "projectName": "movie recommendation",
-        "projectPath": "D:\\Google Drive\\Facultate\\i.net\\movie-recommendation\\project\\movie recommendation.csproj",
-        "packagesPath": "C:\\Users\\atode\\.nuget\\packages\\",
-        "outputPath": "D:\\Google Drive\\Facultate\\i.net\\movie-recommendation\\project\\obj\\",
+        "projectPath": "D:\\movie-recommendation\\project\\movie recommendation.csproj",
+        "packagesPath": "C:\\Users\\Marian\\.nuget\\packages\\",
+        "outputPath": "D:\\movie-recommendation\\project\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\atode\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Marian\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +29,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -38,7 +40,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -95,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
