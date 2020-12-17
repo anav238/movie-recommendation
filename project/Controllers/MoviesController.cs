@@ -30,7 +30,7 @@ namespace movie_recommendation.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Movie>> GetMovies(int page = 1, int pageSize = 100) => _repository.GetAll(page, pageSize).ToList();
 
-        [Authorize]
+        //[Authorize]
         // GET: api/Movies/{id}
         [HttpGet("{id}", Name = "GetById")]
         public ActionResult<Movie> GetById(int id)
