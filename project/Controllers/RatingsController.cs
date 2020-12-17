@@ -7,15 +7,17 @@ using movie_recommendation.Entities;
 
 namespace movie_recommendation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class RatingsController : ControllerBase
     {
         private readonly IRatingRepository _repository;
+        private readonly IRepository<Movie> _movieRepository;
 
-        public RatingsController(IRatingRepository repository)
+        public RatingsController(IRatingRepository repository, IRepository<Movie> movieRepository)
         {
             _repository = repository;
+            _movieRepository = movieRepository;
         }
 
         // GET: api/Ratings
@@ -39,19 +41,7 @@ namespace movie_recommendation.Controllers
             return rating;
         }
 
-        // GET: api/Ratings/1/2
-        [HttpGet("{userId}/{movieId}")]
-        public ActionResult<Rating> GetRating(int userId, int movieId)
-        {
-            var rating = _repository.GetRating(userId, movieId);
-
-            if (rating == null)
-            {
-                return NotFound();
-            }
-
-            return rating;
-        }
+       
 
 
 
@@ -72,13 +62,30 @@ namespace movie_recommendation.Controllers
                 else
                     throw;
             }
-            
-           
-            return CreatedAtAction("GetRating", new { id_1 = rating.userId, id_2 = rating.movieId }, rating);
+
+            var movie = _movieRepository.GetById(rating.movieId);
+            movie.Rating = ((float)rating.rating + movie.Rating) / (movie.NumberOfRatings + 1);
+            movie.NumberOfRatings = movie.NumberOfRatings + 1;
+            _movieRepository.Update(movie);
+            return CreatedAtAction("GetRating", new { userId = rating.userId, movieId = rating.movieId }, rating);
+        }
+
+        // GET: api/Ratings/1/2
+        [HttpGet("{userId}/{movieId}", Name = "GetRating")]
+        public ActionResult<Rating> GetRating(int userId, int movieId)
+        {
+            var rating = _repository.GetRating(userId, movieId);
+
+            if (rating == null)
+            {
+                return NotFound();
+            }
+
+            return rating;
         }
 
         // DELETE: api/Ratings/5/5
-        
+
         [HttpDelete("{userId}/{movieId}")]
         public ActionResult<Rating> DeleteRating(int userId, int movieId)
         {

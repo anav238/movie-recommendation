@@ -10,7 +10,7 @@ using movie_recommendation.Entities;
 
 namespace movie_recommendation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class MoviesController : ControllerBase
     {
@@ -45,6 +45,7 @@ namespace movie_recommendation.Controllers
             return movie;
         }
 
+
         [HttpGet("{movieId}/rating")]
         public ActionResult<object> GetMovieRating(int movieId)
         {
@@ -55,6 +56,12 @@ namespace movie_recommendation.Controllers
         public ActionResult<IEnumerable<Rating>> GetMovieRatings(int movieId, int page = 1, int pageSize = 100)
         {
             return _movieRepository.GetMovieRatings(movieId, page, pageSize).ToList();
+        }
+
+        [HttpGet("recent-releases")]
+        public ActionResult<IEnumerable<Movie>> GetMoviesByRelease( int page = 1, int pageSize = 100)
+        {
+            return _movieRepository.GetMoviesByRelease( page, pageSize).ToList();
         }
 
         [HttpGet("{movieId}/tags")]

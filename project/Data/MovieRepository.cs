@@ -22,14 +22,14 @@ namespace movie_recommendation.Data
 
         public object GetMovieRating(int movieId)
         {
-            var rating =  _context.Ratings
-                .Where(rating => rating.movieId == movieId).Take(1000).Average(rating => rating.rating);
+            var movie = _context.Movies
+                 .SingleOrDefault(x => x.Id == movieId);
 
             return new
             {
-                movie = GetById(movieId),
-                rating = rating
-
+                ID = movie.Id,
+                Movie = movie.Title,
+                rating = movie.Rating
             };
         }
 
@@ -46,6 +46,13 @@ namespace movie_recommendation.Data
                 .Where(movie => movie.Genres.Contains(genre)).Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
 
-        
+        public IEnumerable<Movie> GetMoviesByRelease( int page, int pageSize)
+        {
+            bool condition(string x) => x.LastIndexOf("(") != -1 && ( x.Substring(x.LastIndexOf("("))[1] == '1' || x.Substring(x.LastIndexOf("("))[1] == '2' ) ;
+
+            return _context.Movies.ToList()
+                .OrderByDescending(movie => condition(movie.Title)? movie.Title.Substring(movie.Title.LastIndexOf("(")) : null ).Skip((page - 1) * pageSize).Take(pageSize);
+        }
+
     }
 }
