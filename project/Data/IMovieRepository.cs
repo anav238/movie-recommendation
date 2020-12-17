@@ -15,5 +15,7 @@ namespace movie_recommendation.Data
 
         object GetMovieRating(int movieId);
 
+        IEnumerable<Movie> GetMoviesByRelease(int page, int pageSize);
+
     }
 }

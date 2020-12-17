@@ -7,7 +7,7 @@ using movie_recommendation.Entities;
 
 namespace movie_recommendation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class FriendshipsController : ControllerBase
     {
