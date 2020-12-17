@@ -19,5 +19,10 @@ namespace movie_recommendation.Entities
 
         [Column(Order = 4)]
         public DateTime timestamp { get; set; }
+
+        public Rating()
+        {
+            timestamp = DateTime.Now;
+        }
     }
 }

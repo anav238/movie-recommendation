@@ -25,7 +25,7 @@ function transformLocalTitle(text) {
 }
 
 // se sterge cand se mai rezolva la back
-function fetchRetryHeader(url, options = {}, retries = 10) {
+function fetchRetryHeader(url, options = {}, retries = 15) {
   return fetch(url, options)
     .then((res) => {
       if (res.ok) return res.json();

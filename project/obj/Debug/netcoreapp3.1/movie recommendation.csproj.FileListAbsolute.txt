@@ -230,8 +230,6 @@ D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\
 D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.csproj.CoreCompileInputs.cache
-D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.MvcApplicationPartsAssemblyInfo.cache
 D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.csprojAssemblyReference.cache
 D:\Google Drive\Facultate\i.net\movie-recommendation\project\bin\Debug\netcoreapp3.1\appsettings.Development.json
 D:\Google Drive\Facultate\i.net\movie-recommendation\project\bin\Debug\netcoreapp3.1\appsettings.json
@@ -389,3 +387,10 @@ D:\Google Drive\Facultate\i.net\movie-recommendation\project\obj\Debug\netcoreap
 D:\Google Drive\Facultate\i.net\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.pdb
 D:\Google Drive\Facultate\i.net\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.genruntimeconfig.cache
 D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\movie-recommendation\project\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.csproj.CoreCompileInputs.cache
+D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.MvcApplicationPartsAssemblyInfo.cs
+D:\movie-recommendation\project\obj\Debug\netcoreapp3.1\movie recommendation.MvcApplicationPartsAssemblyInfo.cache
