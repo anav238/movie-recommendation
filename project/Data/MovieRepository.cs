@@ -46,6 +46,13 @@ namespace movie_recommendation.Data
                 .Where(movie => movie.Genres.Contains(genre)).Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
 
-        
+        public IEnumerable<Movie> GetMoviesByRelease( int page, int pageSize)
+        {
+            bool condition(string x) => x.LastIndexOf("(") != -1 && ( x.Substring(x.LastIndexOf("("))[1] == '1' || x.Substring(x.LastIndexOf("("))[1] == '2' ) ;
+
+            return _context.Movies.ToList()
+                .OrderByDescending(movie => condition(movie.Title)? movie.Title.Substring(movie.Title.LastIndexOf("(")) : null ).Skip((page - 1) * pageSize).Take(pageSize);
+        }
+
     }
 }

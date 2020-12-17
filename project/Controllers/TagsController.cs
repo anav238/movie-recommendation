@@ -7,7 +7,7 @@ using movie_recommendation.Entities;
 
 namespace movie_recommendation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class TagsController : ControllerBase
     {
@@ -74,7 +74,7 @@ namespace movie_recommendation.Controllers
             }
             
            
-            return CreatedAtAction("GetTag", new { id_1 = tag.userId, id_2 = tag.movieId }, tag);
+            return CreatedAtAction("GetTag", new { userId = tag.userId, movieId = tag.movieId }, tag);
         }
 
         // DELETE: api/Tags/5/5

@@ -20,6 +20,11 @@ namespace movie_recommendation.Entities
         public String tag { get; set; }
 
         [Column(Order = 5)]
-        public string timestamp { get; set; }
+        public DateTime timestamp { get; set; }
+
+        public Tag()
+        {
+            this.timestamp = DateTime.Now;
+        }
     }
 }
