@@ -30,6 +30,11 @@ namespace movie_recommendation
 
             });
 
+            services.AddSwaggerGen((options) =>
+            {
+                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My API", Version = "v1" });
+            });
+
             services.AddScoped<IFriendshipRepository, FriendshipRepository>();
             services.AddScoped<IRatingRepository, RatingRepository>();
             services.AddScoped<ITagRepository, TagRepository>();
@@ -65,6 +70,8 @@ namespace movie_recommendation
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1")); 
             }
 
             app.UseDefaultFiles();
