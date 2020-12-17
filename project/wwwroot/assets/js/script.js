@@ -26,9 +26,41 @@ function transformLocalTitle(text) {
     return text;
 }
 
+// se sterge cand se mai rezolva la back
+function fetchRetryHeader(url, options = {}, retries = 10) {
+    return fetch(url, options)
+      .then(res => {
+        if (res.ok) return res.json()
+  
+        if (retries > 0) {
+            console.log("error header... retrying");
+          return fetchRetryHeader('/api/movies/' + Math.floor(Math.random() * 10000), options, retries - 1)
+        } else {
+          throw new Error(res)
+        }
+      })
+      .catch(console.error)
+  }
+
+// se sterge cand se mai rezolva la back
+function fetchRetryTop(url, options = {}, retries = 10) {
+    return fetch(url, options)
+      .then(res => {
+        if (res.ok) return res.json()
+  
+        if (retries > 0) {
+            console.log("error top... retrying");
+          return fetchRetryTop('/api/movies?page=' + Math.floor(Math.random() * 2000) + '&pageSize=5', options, retries - 1)
+        } else {
+          throw new Error(res)
+        }
+      })
+      .catch(console.error)
+  }
+
 // Recommendation Header
-fetch('/api/movies/' + Math.floor(Math.random() * 10000))
-    .then(response => response.json())
+fetchRetryHeader('/api/movies/' + Math.floor(Math.random() * 10000))
+    //.then(response => response.json())
     .then(data => {
         fetch(tmdbURL + 'movie/' + data.tmdbId + '?api_key=' + tmdbKey + '&language=en-US')
             .then(tmdbResponse => tmdbResponse.json())
@@ -109,8 +141,8 @@ fetch('/api/movies/' + Math.floor(Math.random() * 10000))
     });
 
 // Top Picks
-fetch('/api/movies?page=' + Math.floor(Math.random() * 2000) + '&pageSize=5')
-    .then(response => response.json())
+fetchRetryTop('/api/movies?page=' + Math.floor(Math.random() * 2000) + '&pageSize=5')
+    // .then(response => response.json())
     .then(data => {
         for(let i in data) {
             fetch(tmdbURL + 'movie/' + data[i].tmdbId + '?api_key=' + tmdbKey + '&language=en-US')
