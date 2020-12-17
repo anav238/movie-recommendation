@@ -43,14 +43,14 @@ body {
   margin: 0 auto;
 }
 header {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5));
+  background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
   background-size: cover;
   background-position: center;
-} 
+}
 nav {
   position: fixed;
   width: 100%;
-  color: #fff;
+  color: #212121;
   height: 85px;
   display: flex;
   z-index: 2;
@@ -64,7 +64,7 @@ nav .container {
 }
 nav .container h1.title {
   text-transform: uppercase;
-  border: 3px solid #fff;
+  border: 3px solid #212121;
   padding: 12px;
   margin: 0;
   line-height: 1;
@@ -85,10 +85,10 @@ nav .container ul.links li + li {
   margin-left: 30px;
 }
 nav.invert {
-  color: #212121;
+  color: #fff;
 }
 nav.invert .container h1.title {
-  border-color: #212121;
+  border-color: #fff;
 }
 nav.scrolled {
   color: #fff;
@@ -98,7 +98,9 @@ nav.scrolled .container h1.title {
   border-color: #fff;
 }
 header img.poster {
+  opacity: 0; /* 1 */
   width: 300px;
+  height: 450px;
   border-radius: 10px;
   margin-right: 40px;
   box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
@@ -106,13 +108,13 @@ header img.poster {
 nav + * {
   padding-top: 100px;
 }
-header > .container { 
+header > .container {
   padding: 30px 0 160px 0;
   display: flex;
-  color: #fff;
+  color: #212121;
 }
 header > .container .info {
-  display: flex;
+  display: none; /* flex */
   flex-direction: column;
   justify-content: center;
 }
@@ -261,8 +263,8 @@ main section ul li img.poster {
   border-radius: 8px;
   margin-bottom: 15px;
   box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  height: auto;
+  width: 220px;
+  height: 330px;
 }
 main section ul li h3 {
   margin: 0 0 4px 0;
@@ -288,9 +290,11 @@ footer {
   }
   header img.poster {
     width: 275px;
+    height: 411px;
   }
   main section ul li {
     width: 190px;
+    height: 285px;
   }
 }
 @media only screen and (max-width: 1299px) {
@@ -299,8 +303,10 @@ footer {
   }
   header img.poster {
     width: 250px;
+    height: 375px;
   }
   main section ul li {
     width: 150px;
+    height: 225px;
   }
 }

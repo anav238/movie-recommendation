@@ -29,34 +29,30 @@ function transformLocalTitle(text) {
 // se sterge cand se mai rezolva la back
 function fetchRetryHeader(url, options = {}, retries = 10) {
     return fetch(url, options)
-      .then(res => {
-        if (res.ok) return res.json()
-  
-        if (retries > 0) {
-            console.log("error header... retrying");
-          return fetchRetryHeader('/api/movies/' + Math.floor(Math.random() * 10000), options, retries - 1)
-        } else {
-          throw new Error(res)
-        }
-      })
-      .catch(console.error)
-  }
+        .then(res => {
+            if (res.ok) return res.json();
+            if (retries > 0) {
+                console.log("error header... retrying");
+                return fetchRetryHeader('/api/movies/' + Math.floor(Math.random() * 10000), options, retries - 1);
+            }
+            else throw new Error(res);
+        })
+        .catch(console.error);
+ }
 
 // se sterge cand se mai rezolva la back
 function fetchRetryTop(url, options = {}, retries = 10) {
     return fetch(url, options)
-      .then(res => {
-        if (res.ok) return res.json()
-  
-        if (retries > 0) {
-            console.log("error top... retrying");
-          return fetchRetryTop('/api/movies?page=' + Math.floor(Math.random() * 2000) + '&pageSize=5', options, retries - 1)
-        } else {
-          throw new Error(res)
-        }
-      })
-      .catch(console.error)
-  }
+        .then(res => {
+            if (res.ok) return res.json()
+            if (retries > 0) {
+                console.log("error top... retrying");
+                return fetchRetryTop('/api/movies?page=' + Math.floor(Math.random() * 2000) + '&pageSize=5', options, retries - 1);
+            }
+            else throw new Error(res);
+        })
+        .catch(console.error);
+ }
 
 // Recommendation Header
 fetchRetryHeader('/api/movies/' + Math.floor(Math.random() * 10000))
@@ -92,12 +88,9 @@ fetchRetryHeader('/api/movies/' + Math.floor(Math.random() * 10000))
 
                 if(tmdbData.backdrop_path) {
                     let header = document.querySelector("header");
-                    header.style.backgroundImage = window.getComputedStyle(header).getPropertyValue("background-image") + ", url(https://image.tmdb.org/t/p/original" + tmdbData.backdrop_path + ")";
-                }
-                else {
-                    document.querySelector("header").style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0))";
-                    document.querySelector("header > .container").style.color = "#212121";
                     document.querySelector("nav").classList.add("invert");
+                    document.querySelector("header > .container").style.color = "#fff";
+                    header.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url(https://image.tmdb.org/t/p/original" + tmdbData.backdrop_path + ")";
                 }
             });
         
@@ -119,6 +112,9 @@ fetchRetryHeader('/api/movies/' + Math.floor(Math.random() * 10000))
                             directorList.push(tmdbData.crew[i].name);
                     director.innerHTML = "Director: " + directorList.join(", ");
                 }
+                let poster = document.querySelector("header img.poster");
+                if(poster) poster.style.opacity = "1";
+                document.querySelector("header > .container .info").style.display = "flex";
             });
         /*
         fetch('/api/movies/' + data.id + '/rating')
