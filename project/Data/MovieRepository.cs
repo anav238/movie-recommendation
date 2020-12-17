@@ -22,14 +22,14 @@ namespace movie_recommendation.Data
 
         public object GetMovieRating(int movieId)
         {
-            var rating =  _context.Ratings
-                .Where(rating => rating.movieId == movieId).Take(1000).Average(rating => rating.rating);
+            var movie = _context.Movies
+                 .SingleOrDefault(x => x.Id == movieId);
 
             return new
             {
-                movie = GetById(movieId),
-                rating = rating
-
+                ID = movie.Id,
+                Movie = movie.Title,
+                rating = movie.Rating
             };
         }
 

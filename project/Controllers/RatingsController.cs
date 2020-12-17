@@ -12,10 +12,12 @@ namespace movie_recommendation.Controllers
     public class RatingsController : ControllerBase
     {
         private readonly IRatingRepository _repository;
+        private readonly IRepository<Movie> _movieRepository;
 
-        public RatingsController(IRatingRepository repository)
+        public RatingsController(IRatingRepository repository, IRepository<Movie> movieRepository)
         {
             _repository = repository;
+            _movieRepository = movieRepository;
         }
 
         // GET: api/Ratings
@@ -60,8 +62,11 @@ namespace movie_recommendation.Controllers
                 else
                     throw;
             }
-            
-           
+
+            var movie = _movieRepository.GetById(rating.movieId);
+            movie.Rating = ((float)rating.rating + movie.Rating) / (movie.NumberOfRatings + 1);
+            movie.NumberOfRatings = movie.NumberOfRatings + 1;
+            _movieRepository.Update(movie);
             return CreatedAtAction("GetRating", new { userId = rating.userId, movieId = rating.movieId }, rating);
         }
 
