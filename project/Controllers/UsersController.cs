@@ -75,7 +75,18 @@ namespace movie_recommendation.Controllers
             return user;
         }
 
+        [HttpGet("{id}/recommendations")]
+        public ActionResult<IEnumerable<Movie>> GetRecommendationsForUser(int id)
+        {
+            var recommendations = _userRepository.GetRecommendedMovies(id);
 
+            if (recommendations == null)
+            {
+                return NotFound();
+            }
+
+            return recommendations.ToList();
+        }
 
         // POST: api/Users
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

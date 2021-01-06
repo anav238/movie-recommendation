@@ -45,5 +45,14 @@ namespace movie_recommendation.Data
         {
             return _context.Friendships.Find(id, friendId);
         }
+
+        IEnumerable<Movie> IUserRepository.GetRecommendedMovies(int id)
+        {
+            var recommendedMovies = (from recommendation in _context.Recommendations
+                                     join movie in _context.Movies on recommendation.movieId equals movie.Id
+                                     where recommendation.userId == id
+                                     select movie);
+            return recommendedMovies;
+        }
     }
 }
