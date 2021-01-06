@@ -124,20 +124,6 @@ namespace ModelTraining
         {
             Console.WriteLine("=============== Making a prediction ===============");
             var predictionEngine = mlContext.Model.CreatePredictionEngine<Rating, RatingPrediction>(model);
-            /*var testInput = new Rating { userId = 6, movieId = 10 };
-
-            var movieRatingPrediction = predictionEngine.Predict(testInput);
-            if (Math.Round(movieRatingPrediction.score, 1) > 7)
-            {
-                Console.WriteLine("Movie " + testInput.movieId + " is recommended for user " + testInput.userId);
-            }
-            else
-            {
-                Console.WriteLine("Movie " + testInput.movieId + " is not recommended for user " + testInput.userId);
-            }
-            */
-            // find the top 5 movies for a given user
-            
 
             Console.WriteLine("Calculating the top 5 movies for user " + id.ToString());
             
@@ -188,10 +174,7 @@ namespace ModelTraining
                 }
             }
             
-
-            
-
-
+         
         }
 
       

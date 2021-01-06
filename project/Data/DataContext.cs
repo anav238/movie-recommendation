@@ -16,6 +16,8 @@ namespace movie_recommendation.Data
 
         public DbSet<Movie> Movies { get; set; }
 
+        public DbSet<Recommendation> Recommendations {get; set;}
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Friendship>()

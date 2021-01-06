@@ -12,5 +12,7 @@ namespace movie_recommendation.Data
         IEnumerable<Movie> GetFriendMovies(int id, int friendId, int page, int pageSize);
 
         Friendship GetFriendship(int id, int friendId);
+
+        IEnumerable<Movie> GetRecommendedMovies(int id);
     }
 }
