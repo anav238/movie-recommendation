@@ -407,3 +407,19 @@ project/.vs/movie recommendation/config/applicationhost.config
 project/movierecommendationapp.db
 ModelTraining/movierecommendationapp.db
 
+project/.vs/movie recommendation/config/applicationhost.config
+project/.vs/movie recommendation/v16/.suo
+project/bin/Debug/netcoreapp3.1/movie recommendation.dll
+project/bin/Debug/netcoreapp3.1/movie recommendation.pdb
+project/bin/Debug/netcoreapp3.1/movie recommendation.runtimeconfig.dev.json
+project/obj/Debug/netcoreapp3.1/movie recommendation.assets.cache
+project/obj/Debug/netcoreapp3.1/movie recommendation.csproj.CoreCompileInputs.cache
+project/obj/Debug/netcoreapp3.1/movie recommendation.csproj.FileListAbsolute.txt
+project/obj/Debug/netcoreapp3.1/movie recommendation.csprojAssemblyReference.cache
+project/obj/Debug/netcoreapp3.1/movie recommendation.dll
+project/obj/Debug/netcoreapp3.1/movie recommendation.genruntimeconfig.cache
+project/obj/Debug/netcoreapp3.1/movie recommendation.pdb
+project/obj/movie recommendation.csproj.nuget.dgspec.json
+project/obj/movie recommendation.csproj.nuget.g.props
+project/obj/project.assets.json
+project/obj/project.nuget.cache
