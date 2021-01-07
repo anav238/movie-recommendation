@@ -33,7 +33,7 @@ namespace movie_recommendation.Controllers
         {
             var rating = _repository.GetRatings(movieId, page, pageSize).ToList();
 
-            if (rating == null)
+            if (rating.Count() == 0)
             {
                 return NotFound();
             }
