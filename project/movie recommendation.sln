@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "movie recommendation", "movie recommendation.csproj", "{7FF52BC1-AA6B-4F84-8C6D-640F788F73B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAndFriendship_Database_PopulateScript", "..\UserAndFriendship_Database_PopulateScript\UserAndFriendship_Database_PopulateScript.csproj", "{062B300E-D519-4418-9C02-26A2278CC76E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserAndFriendship_Database_PopulateScript", "..\UserAndFriendship_Database_PopulateScript\UserAndFriendship_Database_PopulateScript.csproj", "{062B300E-D519-4418-9C02-26A2278CC76E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "movie-recommendation.Tests", "..\movie-recommendation.Tests\movie-recommendation.Tests.csproj", "{A5C10924-994C-47E5-8057-D6A1306F7239}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{062B300E-D519-4418-9C02-26A2278CC76E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{062B300E-D519-4418-9C02-26A2278CC76E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{062B300E-D519-4418-9C02-26A2278CC76E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5C10924-994C-47E5-8057-D6A1306F7239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5C10924-994C-47E5-8057-D6A1306F7239}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5C10924-994C-47E5-8057-D6A1306F7239}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5C10924-994C-47E5-8057-D6A1306F7239}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

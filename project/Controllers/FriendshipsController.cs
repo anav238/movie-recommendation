@@ -29,14 +29,14 @@ namespace movie_recommendation.Controllers
         [HttpGet("{id}")]
         public ActionResult<IEnumerable<Friendship>> GetFriends(int id, int page = 1, int pageSize=100)
         {
-            var friendship = _repository.GetFriends(id,page, pageSize).ToList();
+            var friendship = _repository.GetFriends(id,page, pageSize);
 
             if (friendship == null)
             {
                 return NotFound();
             }
 
-            return friendship;
+            return friendship.ToList();
         }
 
         // GET: api/Friendships/1/2

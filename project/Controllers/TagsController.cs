@@ -31,7 +31,7 @@ namespace movie_recommendation.Controllers
         {
             var tag = _repository.GetTags(movieId, page, pageSize).ToList();
 
-            if (tag == null)
+            if (tag.Count() == 0)
             {
                 return NotFound();
             }
