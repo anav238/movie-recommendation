@@ -128,7 +128,7 @@ namespace movie_recommendation.Controllers
 
             return Ok(new
             {
-                Username = user.Username,
+                username = user.Username,
                 password = user.Password,
                 Token = tokenString
             });
@@ -158,6 +158,7 @@ namespace movie_recommendation.Controllers
 
             return Ok(new
             {
+                Id = user_log.Id,
                 Username = user_log.Username,
                 Token = tokenString
             });
