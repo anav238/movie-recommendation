@@ -79,6 +79,8 @@ namespace movie_recommendation
 
             app.UseRouting();
 
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

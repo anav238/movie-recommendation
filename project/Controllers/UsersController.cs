@@ -101,7 +101,44 @@ namespace movie_recommendation.Controllers
         [HttpPost("authenticate")]
         public ActionResult<User> Authenticate([FromBody] User user)
         {
-            var user_log = _repository.Authenticate(user.Username, user.Password);
+            var user_status = _userRepository.Authenticate(user.Username, user.Password);
+            if (user_status == "Failed")
+            {
+                return BadRequest(new { message = "Failed" });
+            }
+            if (user_status == "User exists")
+            {
+                return BadRequest(new { message = "username exist" });
+            }
+
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("My-Top-Secret-Password");
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                    {
+                        new Claim(ClaimTypes.Name, user.Id.ToString())
+                    }),
+                Expires = DateTime.UtcNow.AddMinutes(2),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+
+            return Ok(new
+            {
+                Username = user.Username,
+                password = user.Password,
+                Token = tokenString
+            });
+        }
+
+
+        [HttpPost("login")]
+        public ActionResult<User> Login([FromBody] User user)
+        {
+            var user_log = _userRepository.Login(user.Username, user.Password);
             if (user_log == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
 
@@ -121,7 +158,6 @@ namespace movie_recommendation.Controllers
 
             return Ok(new
             {
-                Id = user_log.Id,
                 Username = user_log.Username,
                 Token = tokenString
             });

@@ -15,6 +15,37 @@ namespace movie_recommendation.Data
         {
             _context = context;
         }
+        public string Authenticate(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                return "Failed";
+
+            var user = _context.Users.SingleOrDefault(x => x.Username == username);
+
+            if (user != null)
+                return "User exists";
+
+            return "Ok";
+
+        }
+
+
+        public User Login(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                return null;
+
+            var user = _context.Users.SingleOrDefault(x => x.Username == username);
+
+            if (user == null)
+                return null;
+
+            if (password != user.Password)
+                return null;
+
+            // authentication successful
+            return user;
+        }
 
         public IEnumerable<Movie> GetFriendMovies(int id, int friendId, int page, int pageSize)
         {

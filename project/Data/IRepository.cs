@@ -14,6 +14,5 @@ namespace movie_recommendation
 
         void Remove(T entity);
 
-        public User Authenticate(string username, string password);
     }
 }

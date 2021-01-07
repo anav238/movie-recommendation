@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+    <link href="assets/css/auth.css" rel="stylesheet" />
+    <script language="javascript" type="text/javascript" src="assets/js/auth.js"></script>
+    <title>Raccoon Cinema</title>
+</head>
+<body>
+    <div class="center">
+        <b>
+            <h2>Log in</h2>
+        </b>
+        <form class="form" id="add_user_form" method="post">
+            <p>
+                <span id="error_login"></span>
+            </p>
+            <p>
+                <label for="name"><B>User Name:</B></label>
+                <br><input type="text" id="userName" placeholder="User name...">
+            </p>
+            <p>
+                <label for="pass"><b>Password:</b></label>
+                <br><input type="password" id="password" placeholder="Password..."><input type="checkbox" onclick="showPassword()">Show Password
+           </p>
+        </form>
+        <p>
+            <input type="submit" value="Log in" onclick="login_user()">
+            <!--</p>-->
+        </p>
+        <label>display after login: </label>
+        <p><span id="display"></span></p>
+
+    </div>
+</body>
+</html>
