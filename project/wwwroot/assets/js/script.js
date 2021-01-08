@@ -14,7 +14,9 @@ window.addEventListener("scroll", () => {
 let tmdbURL = "https://api.themoviedb.org/3/";
 let tmdbKey = "684e74556adcb4fe60b7c3b4399540ff";
 
-let userId = 1;
+let cookie = getCookie("token");
+let userId = cookie[0];
+console.log(userId);
 
 function transformLocalTitle(text) {
 	text = text.replace(/\s*\(.*?\)\s*/g, "");
@@ -255,3 +257,20 @@ if(window.location.pathname === "/" || window.location.pathname === "index.html"
 			}
 		});
 }
+
+function getCookie(cname) {
+	var name = cname + "=";
+	var ca = document.cookie.split(';');
+	for (var i = 0; i < ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			spilt_cokie = c.substring(name.length, c.length).split(' ');
+			return [spilt_cokie[0], spilt_cokie[1]];
+		}
+	}
+	return "";
+}
+

@@ -5,7 +5,7 @@ console.log("token: " + cokie[1])
 
 
 //token after login
-if (document.cookie != "") {
+/*if (document.cookie !== undefined && document.cookie !== "") {
     alert("Welcome again ");
     fetch('/api/v1/Users/1', {
         headers: { 'Authorization': 'Bearer ' + cokie[1] }
@@ -66,7 +66,7 @@ function login_user() {
                 d.setTime(d.getTime() + (24 * 60 * 60 * 1000));
                 var expires = "expires=" + d.toUTCString();
                 document.cookie = "token" + "=" + data.id + " " + data.token + ";" + expires + ";path=/";
-                //document.location.href = "/";
+                document.location.href = "/";
             }
         });
 }
@@ -93,27 +93,27 @@ function register_user() {
         .then(response => response.json())
         .then(data => {
             if (data.message == "username exist") {
-                error_name.textContent = "Username used"
-                error_name.style.color = "red"
+               // error_name.textContent = "Username used"
+                //error_name.style.color = "red"
             }
             else if (data.message == "Failed") {
-                error_name.textContent = "Complete all field"
-                error_name.style.color = "red"
+                //error_name.textContent = "Complete all field"
+                //error_name.style.color = "red"
             }
             else {
-                error_name.textContent = ""
+                //error_name.textContent = ""
             }
 
             if (password.match(passw)) {
-                error_password.textContent = ""
+                //error_password.textContent = ""
             }
             else {
-                error_password.textContent = "password between 6 to 20 characters, one numeric digit, one uppercase and one lowercase letter "
-                error_password.style.color = "red"
+               // error_password.textContent = "password between 6 to 20 characters, one numeric digit, one uppercase and one lowercase letter "
+                //error_password.style.color = "red"
             }
 
 
-            if (error_name.textContent == "" && error_password.textContent == "") {
+            //if (error_name.textContent == "" && error_password.textContent == "") {
 
                 let _data = {
                     username: userName,
@@ -135,9 +135,9 @@ function register_user() {
                         document.location.href = "/";
                     });
 
-            }
+            //}
         });
-    document.getElementById("display").innerHTML = result;
+    //document.getElementById("display").innerHTML = result;
 }
 
 
