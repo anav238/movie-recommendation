@@ -9,6 +9,9 @@
     url(../fonts/icons/MaterialIcons-Regular.woff) format('woff'),
     url(../fonts/icons/MaterialIcons-Regular.ttf) format('truetype');
 }
+* {
+  box-sizing: border-box;
+}
 .i {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -38,7 +41,7 @@ body {
   background-color: #E5E5E5;
 }
 .container {
-  width: 100%;
+  width: 95%;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -62,6 +65,58 @@ nav .container {
   justify-content: space-between;
   padding: 15px 0;
 }
+nav .container .menu-icon {
+  cursor: pointer;
+  display: none;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+}
+ 
+nav .container .menu-icon .navicon {
+  background: #fff;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+ 
+nav .container .menu-icon .navicon:before,
+nav .container .menu-icon .navicon:after {
+  background: #fff;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+ 
+nav .container .menu-icon .navicon:before {
+  top: 5px;
+}
+ 
+nav .container .menu-icon .navicon:after {
+  top: -5px;
+}
+nav .container .menu-button {
+  display: none;
+}
+nav .container .menu-button:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+nav .container .menu-button:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+nav .container .menu-button:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+nav .container .menu-button:checked ~ .menu-icon .navicon:before,
+nav .container .menu-button:checked ~ .menu-icon .navicon:after {
+  top: 0;
+}
 nav .container h1.title {
   text-transform: uppercase;
   border: 3px solid #212121;
@@ -71,6 +126,10 @@ nav .container h1.title {
   font-weight: 700;
   transition: border-color 200ms linear;
 }
+nav .container h1.title a {
+  text-decoration: none;
+  color: inherit;
+}
 nav .container ul.links {
   display: flex;
   padding: 0;
@@ -79,6 +138,11 @@ nav .container ul.links {
   font-weight: 500;
 }
 nav .container ul.links li {
+  display: inline-flex;
+}
+nav .container ul.links li a {
+  text-decoration: none;
+  color: inherit;
   display: inline-flex;
 }
 nav .container ul.links li + li {
@@ -99,8 +163,9 @@ nav.scrolled .container h1.title {
 }
 header img.poster {
   opacity: 0; /* 1 */
-  width: 300px;
-  height: 450px;
+  max-width: 300px;
+  width: 23%;
+  object-fit: contain;
   border-radius: 10px;
   margin-right: 40px;
   box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
@@ -132,7 +197,7 @@ header > .container .info .info-main .info-main-title span {
   opacity: 0.7;
 }
 header > .container .info .info-main .info-main-data {
-  margin-top: 10px;
+  margin-top: 13px;
   line-height: 1;
 }
 header > .container .info .info-main .info-main-data .match {
@@ -257,14 +322,13 @@ main section ul li {
   display: inline-flex;
   flex-direction: column;
   text-align: center;
-  width: 220px;
+  width: 17%;
 }
 main section ul li img.poster {
   border-radius: 8px;
   margin-bottom: 15px;
   box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.2);
-  width: 220px;
-  height: 330px;
+  width: 100%;
 }
 main section ul li h3 {
   margin: 0 0 4px 0;
@@ -283,30 +347,211 @@ footer {
   margin: 120px 0 20px 0;
   text-align: center;
 }
+.page header > .container {
+  padding: 0px 0px 100px;
+}
+.page header > .container h1 {
+  font-size: 45px;
+}
+.page main section ul {
+  flex-direction: column;
+}
+.page main section ul li {
+  flex-direction: row;
+  width: 100%;
+  text-align: left;
+}
+.page main section ul li + li {
+  margin-top: 40px;
+}
+.page main section ul li img.poster {
+  width: 150px;
+  height: 225px;
+  margin:  0 30px 0 0;
+}
+.page main section ul li .movie-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.page main section ul li .movie-details .movie-details-title * {
+  line-height: 1;
+}
+.page main section ul li .movie-details .movie-details-title h3 {
+  display: inline-flex;
+  font-size: 24px;
+  margin: 0;
+}
+.page main section ul li .movie-details .movie-details-title span {
+  font-size: 24px;
+  font-weight: 400;
+  opacity: 0.7;
+}
+.page main section ul li .movie-details .movie-details-data .language:after {
+  content: "\2022";
+  margin: 0 2px 0 6px;
+  opacity: 0.7;
+}
+.page main section ul li .movie-details .movie-details-data .duration:before {
+  content: "\2022";
+  margin: 0 6px 0 2px;
+  opacity: 0.7;
+}
+.page main section ul li .movie-details .movie-details-rating {
+  margin: 10px 0;
+}
+.page main section ul li .movie-details .movie-details-rating a.rating {
+  color: inherit;
+}
+.page main section ul li .movie-details .movie-details-description {
+  margin-bottom: 10px;
+}
+.page main section ul li .movie-details .movie-details-cast {
+  opacity: 0.7;
+}
+.friends header > .container {
+  flex-direction: column;
+}
+.friends header > .container h1 {
+  margin-bottom: 0;
+}
+.friends header > .container ul.friendslist {
+  margin: 0 0 30px 0;
+  list-style: none;
+  padding: 0px;
+}
+.friends header > .container ul.friendslist li {
+  display: inline;
+  font-weight: 500;
+}
+.friends header > .container ul.friendslist li::after {
+  content: ", ";
+}
+.friends header > .container ul.friendslist li:last-child::after {
+  content: "";
+}
+@media only screen and (max-width: 1399px) {
 
-@media only screen and (max-width: 1499px) {
-  .container {
-    max-width: 1200px;
+}
+@media only screen and (max-width: 1199px) {
+  header > .container .info {
+    font-size: smaller;
   }
-  header img.poster {
-    width: 275px;
-    height: 411px;
+  header > .container .info .info-main .info-main-title * {
+    font-size: 35px;
   }
-  main section ul li {
-    width: 190px;
-    height: 285px;
+  main section ul li h3 {
+    font-size: 15px;
+  }
+  main section ul li .rating .i {
+    font-size: 18px;
+  }
+  main section ul li .date {
+    font-size: 13px;
   }
 }
-@media only screen and (max-width: 1299px) {
-  .container {
-    max-width: 1000px;
+@media only screen and (max-width: 991px)  {
+  nav {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.9);
+  }
+  nav .container h1.title {
+    border-color: #fff;
+  }
+  nav .container .menu-icon {
+    display: inline-block;
+  }
+  nav .container ul.links {
+    display: none;
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    position: absolute;
+    top: 85px;
+    left: 0px;
+    padding-left: 20px;
+    flex-direction: column;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+  }
+  nav .container ul.links li {
+    margin: 15px 0;
+  }
+  nav .container ul.links li + li {
+    margin-lefT: 0;
+  }
+  nav .container .menu-button:checked ~ ul.links {
+    display: flex;
   }
   header img.poster {
-    width: 250px;
-    height: 375px;
+    margin-right: 0;
+    margin-bottom: 30px;
+    max-width: 300px;
+    width: 35%;
+  }
+  header > .container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  header > .container .info {
+    width: 85%;
+  }
+  header > .container .info .info-user {
+    justify-content: center;
+  }
+  main section {
+    text-align: center;
+  }
+  main section h2 {
+    font-size: 30px;
+    margin: 0;
+  }
+  main section .description {
+    font-size: 15px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  main section ul {
+    align-items: start;
+    flex-wrap: wrap;
+    justify-content: space-around;
   }
   main section ul li {
-    width: 150px;
-    height: 225px;
+    width: 40%;
+    max-width: 220px;
+  }
+  .page main section ul li {
+    width: 100%;
+    max-width: 100%;
+  }
+  main section ul li {
+    margin-top: 30px;
+  }
+  main section ul li:nth-child(1), main section ul li:nth-child(2) {
+    margin-top: 0;
+  }
+}
+@media only screen and (max-width: 575px) {
+  main section ul li:nth-child(2) {
+    margin-top: 30px;
+  }
+  main section ul {
+    align-items: center;
+    flex-direction: column;
+  }
+  main section ul li {
+    width: 100%;
+  }
+  .page main section ul li {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .page main section ul li img.poster {
+    margin: 0 0 30px 0;
+    width: 220px;
+    height: 330px;
   }
 }

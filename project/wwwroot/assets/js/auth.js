@@ -3,6 +3,7 @@ cokie = getCookie("token")
 console.log("id user: " + cokie[0])
 console.log("token: " + cokie[1])
 
+
 //token after login
 if (document.cookie != "") {
     alert("Welcome again ");
@@ -15,7 +16,7 @@ if (document.cookie != "") {
         });
 } else {
     alert("Login");
-}
+}*/
 
 function getCookie(cname) {
     var name = cname + "=";
@@ -35,9 +36,9 @@ function getCookie(cname) {
 
 
 function login_user() {
-    var userName = document.getElementById("userName").value;
+    var userName = document.getElementById("username").value;
     var password = document.getElementById("password").value;
-    var error_login = document.getElementById("error_login");
+    var error_login = document.querySelector("main .error");
     result = userName + " " + password;
     let _user = {
         username: userName,
@@ -53,8 +54,7 @@ function login_user() {
         .then(response => response.json())
         .then(data => {
             if (data.message == "Username or password is incorrect") {
-                error_login.textContent = "Username or password is incorrect";
-                error_login.style.color = "red";
+                error_login.textContent = "Incorrect username or password.";
             }
             else {
                 error_login.textContent = ""
@@ -73,10 +73,12 @@ function login_user() {
 
 
 function register_user() {
-    var userName = document.getElementById("userName").value;
+    var userName = document.getElementById("username").value;
     var password = document.getElementById("password").value;
+
     var error_name = document.getElementById("error_username");
     var error_password = document.getElementById("error_password");
+
     var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
     result = userName + " " + password;
     let _user = {
@@ -110,12 +112,14 @@ function register_user() {
                 error_password.style.color = "red"
             }
 
+
             if (error_name.textContent == "" && error_password.textContent == "") {
 
                 let _data = {
                     username: userName,
                     password: password
                 }
+
                 fetch("/api/v1/Users", {
                     method: "POST",
                     body: JSON.stringify(_data), headers: { "Content-type": "application/json; charset=UTF-8" }

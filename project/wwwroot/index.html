@@ -1,4 +1,5 @@
-﻿<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,12 +11,13 @@
 <body>
     <nav>
         <div class="container">
-            <h1 class="title">Raccoon Cinema</h1>
+            <h1 class="title"><a href="/">Raccoon Cinema</a></h1>
+            <input class="menu-button" type="checkbox" id="menu-button" />
+            <label class="menu-icon" for="menu-button"><span class="navicon"></span></label>
             <ul class="links">
-                <li><i class="i ii">view_list</i>Top Picks</li>
-                <li><i class="i ii">query_builder</i>Recent Releases</li>
-                <li><i class="i ii">people</i>Friends</li>
-                <li><i class="i ii">settings</i>Settings</li>
+                <li><a href="top.html"><i class="i ii">view_list</i>Top Picks</a></li>
+                <li><a href="recents.html"><i class="i ii">query_builder</i>Recent Releases</a></li>
+                <li><a href="friends.html"><i class="i ii">people</i>Friends</a></li>
             </ul>
         </div>
     </nav>
@@ -37,9 +39,11 @@
                 </div>
                 <div class="info-user">
                     <a href="#" class="rating"><i class="i">star_outline</i><i class="i">star_outline</i><i class="i">star_outline</i><i class="i">star_outline</i><i class="i">star_outline</i></a>
+                    <!--
                     <a href="#" class="button button-red"><i class="i ii">favorite</i>Add to Favorites</a>
                     <a href="#" class="button button-orange"><i class="i ii">add_to_queue</i>Add to Watchlist</a>
                     <a href="#" class="button button-blue"><i class="i ii">play_arrow</i>Watch Trailer</a>
+                    -->
                 </div>
                 <div class="info-description"></div>
                 <div class="info-cast">
@@ -86,38 +90,28 @@
             <span class="description">Movies released recently that you haven't rated</span>
             <ul>
                 <li>
-                    <img class="poster" src="https://image.tmdb.org/t/p/w220_and_h330_face/yePO1PrRfrVMGqwJ3EzKhVvQXBX.jpg" alt="Rose Island" />
-                    <h3>Rose Island</h3>
-                    <span class="date">Dec 9, 2020</span>
+                    <img class="poster" src="assets/img/placeholder.svg" alt="movie poster" />
+                    <h3></h3>
+                    <span class="date"></span>
                 </li>
                 <li>
-                    <img class="poster" src="https://image.tmdb.org/t/p/w220_and_h330_face/aSs7V3ryvxCSpcXcxf9NY8YBtGC.jpg" alt="Shawn Mendes: In Wonder" />
-                    <h3>Shawn Mendes: In Wonder</h3>
-                    <span class="date">Nov 23, 2020</span></li>
+                    <img class="poster" src="assets/img/placeholder.svg" alt="movie poster" />
+                    <h3></h3>
+                    <span class="date"></span></li>
                 <li>
-                    <img class="poster" src="https://image.tmdb.org/t/p/w220_and_h330_face/e4qXQXXaVYvHBE3Rx5x3qrmxorB.jpg" alt="The Princess Switch: Switched Again" />
-                    <h3>The Princess Switch: Switched Again</h3>
-                    <span class="date">Nov 19, 2020</span></li>
+                    <img class="poster" src="assets/img/placeholder.svg" alt="movie poster" />
+                    <h3></h3>
+                    <span class="date"></span></li>
                 <li>
-                    <img class="poster" src="https://image.tmdb.org/t/p/w220_and_h330_face/mGQBQTyVqbGWiAMLPNdRuyyjQKO.jpg" alt="Wander" />
-                    <h3>Kevin Hart: Zero F**ks Given</h3>
-                    <span class="date">Nov 17, 2020</span></li>
+                    <img class="poster" src="assets/img/placeholder.svg" alt="movie poster" />
+                    <h3></h3>
+                    <span class="date"></span></li>
                 <li>
-                    <img class="poster" src="https://image.tmdb.org/t/p/w220_and_h330_face/lAaJc9842RDVrjvR3OLPMTeHkiA.jpg" alt="Holidate" />
-                    <h3>Holidate</h3>
-                    <span class="date">Oct 27, 2020</span></li>
+                    <img class="poster" src="assets/img/placeholder.svg" alt="movie poster" />
+                    <h3></h3>
+                    <span class="date"></span></li>
             </ul>
         </section>
-        <!--
-        <section>
-            <h2>Your Watchlist</h2>
-            <span class="description">Movies you added to your Watchlist</span>
-        </section>
-        <section>
-            <h2>Your Favorites</h2>
-            <span class="description">Movies you added to Favorites</span>
-        </section>
-        -->
     </main>
     <footer>
         <div class="container">
