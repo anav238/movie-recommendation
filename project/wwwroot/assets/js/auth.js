@@ -2,7 +2,7 @@ token = getCookie("token")
 console.log("token: " + token)
 
 //token dupa login
-if (document.cookie != "") {
+/*if (document.cookie != "") {
     alert("Welcome again ");
     fetch('/api/v1/Users/1', {
         headers: { 'Authorization': 'Bearer ' + token }
@@ -13,7 +13,7 @@ if (document.cookie != "") {
         });
 } else {
     alert("Login");
-}
+}*/
 
 
 function getCookie(cname) {
@@ -33,9 +33,9 @@ function getCookie(cname) {
 
 
 function login_user() {
-    var userName = document.getElementById("userName").value;
+    var userName = document.getElementById("username").value;
     var password = document.getElementById("password").value;
-    var error_login = document.getElementById("error_login");
+    var error_login = document.querySelector("main .error");
     result = userName + " " + password;
     let _user = {
         username: userName,
@@ -51,8 +51,7 @@ function login_user() {
         .then(response => response.json())
         .then(data => {
             if (data.message == "Username or password is incorrect") {
-                error_login.textContent = "Username or password is incorrect";
-                error_login.style.color = "red";
+                error_login.textContent = "Incorrect username or password.";
             }
             else {
                 error_login.textContent = ""
@@ -71,10 +70,10 @@ function login_user() {
 
 
 function register_user() {
-    var userName = document.getElementById("userName").value;
+    var userName = document.getElementById("username").value;
     var password = document.getElementById("password").value;
-    var error_name = document.getElementById("error_username"); 
-    var error_password = document.getElementById("error_password"); 
+    var error_name = document.querySelector("main .error"); 
+    var error_password = document.querySelector("main .error"); 
     var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
     result = userName + " " + password;
     let _user = {
@@ -89,13 +88,11 @@ function register_user() {
             .then(response => response.json())
             .then(data => {
                 if (data.message == "username exist") {
-                    error_name.textContent = "Username used"
-                    error_name.style.color = "red"
+                    error_name.textContent = "This username is already taken."
                 }
                 else if (data.message == "Failed")
                 {
-                    error_name.textContent = "Complete all field"
-                    error_name.style.color = "red"
+                    error_name.textContent = "You must full in all the fields."
                 }
                 else
                 {
@@ -106,8 +103,7 @@ function register_user() {
                     error_password.textContent = ""
                 }
                 else {
-                    error_password.textContent = "password between 6 to 20 characters, one numeric digit, one uppercase and one lowercase letter "
-                    error_password.style.color = "red"
+                    error_password.textContent = "Your password must be between 6 and 20 characters and must contain at least one numeric digit, one uppercase and one lowercase letter."
                 }
 
                 if (error_name.textContent == "" && error_password.textContent == "") {
@@ -130,17 +126,4 @@ function register_user() {
                     document.location.href = "/";
                 }
             });
-    document.getElementById("display").innerHTML = result;
-}
-
-   
-
-function showPassword() {
-
-    var x = document.getElementById("password");
-    if (x.type === "password") {
-        x.type = "text";
-    } else {
-        x.type = "password";
-    }
 }
