@@ -88,6 +88,19 @@ namespace movie_recommendation.Controllers
             return recommendations.ToList();
         }
 
+        [HttpGet("search/{username}")]
+        public ActionResult<IEnumerable<User>> GetUsersByUsername(string username, int page = 1, int pageSize = 100)
+        {
+            var users = _userRepository.GetUsersByUsername(username, page, pageSize).ToList();
+
+            if (users.Count() == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(users);
+        }
+
         // POST: api/Users
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
