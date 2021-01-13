@@ -17,5 +17,7 @@ namespace movie_recommendation.Data
 
         Friendship GetFriendship(int id, int friendId);
         IEnumerable<Movie> GetRecommendedMovies(int id);
+
+        IEnumerable<User> GetUsersByUsername(string username, int page, int pageSize);
     }
 }

@@ -85,5 +85,11 @@ namespace movie_recommendation.Data
                                      select movie);
             return recommendedMovies;
         }
+
+        public IEnumerable<User> GetUsersByUsername(string username, int page, int pageSize)
+        {
+            return _context.Users
+                .Where(user => user.Username.Contains(username)).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        }
     }
 }

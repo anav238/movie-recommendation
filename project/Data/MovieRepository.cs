@@ -54,5 +54,12 @@ namespace movie_recommendation.Data
                 .OrderByDescending(movie => condition(movie.Title)? movie.Title.Substring(movie.Title.LastIndexOf("(")) : null ).Skip((page - 1) * pageSize).Take(pageSize);
         }
 
+        public IEnumerable<Movie> GetMoviesByTitle(string title, int page, int pageSize)
+        {
+            return _context.Movies
+                .Where(movie => movie.Title.Contains(title)).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+        }
+
     }
 }
