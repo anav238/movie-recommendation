@@ -19,6 +19,7 @@ let fanartKey = "68ec2de67dbfc2250512dc4cfa01ce18";
 
 let cookie = getCookie("token");
 let userId = cookie[0];
+let token = cookie[1];
 
 if(!userId) document.location.href = "/login.html";
 
@@ -35,7 +36,9 @@ function transformLocalTitle(text) {
 if(window.location.pathname === "/" || window.location.pathname === "index.html" || window.location.pathname === "/index.html")
 {
 	// Recommendation Header
-	fetch("/api/v1/Users/" + userId + "/recommendations")
+	fetch("/api/v1/Users/" + userId + "/recommendations", {
+		headers: {'Authorization': 'Bearer ' + token}
+	})
 		.then(response => response.json())
 		.then(data => {
 			fetch(tmdbURL + "movie/" + data[0].tmdbId + "?api_key=" + tmdbKey + "&language=en-US")
@@ -97,7 +100,9 @@ if(window.location.pathname === "/" || window.location.pathname === "index.html"
 					document.querySelector("header > .container .info").style.display = "flex";
 				});
 
-			fetch("/api/v1/movies/" + data[0].id)
+			fetch("/api/v1/movies/" + data[0].id, {
+				headers: {'Authorization': 'Bearer ' + token}
+			})
 				.then(ratingResponse => ratingResponse.json())
 				.then(ratingData => {
 					let ratingStars = document.querySelectorAll("header > .container .info .info-user .rating .i");
@@ -116,7 +121,9 @@ if(window.location.pathname === "/" || window.location.pathname === "index.html"
 		});
 
 	// Top Picks
-	fetch("/api/v1/Users/" + userId + "/recommendations")
+	fetch("/api/v1/Users/" + userId + "/recommendations", {
+		headers: {'Authorization': 'Bearer ' + token}
+	})
 		.then(response => response.json())
 		.then(data => {
 			for (let i = 0; i < 5; i++) {
@@ -135,7 +142,9 @@ if(window.location.pathname === "/" || window.location.pathname === "index.html"
 							poster.src = "https://image.tmdb.org/t/p/w220_and_h330_face" + tmdbData.poster_path;
 					});
 
-				fetch("/api/v1/movies/" + data[i].id)
+				fetch("/api/v1/movies/" + data[i].id, {
+					headers: {'Authorization': 'Bearer ' + token}
+				})
 					.then(ratingResponse => ratingResponse.json())
 					.then(ratingData => {
 						let ratingStars = document.querySelectorAll("main section ul li:nth-child(" + (parseInt(i) + 1) + ") .rating .i");
@@ -154,7 +163,9 @@ if(window.location.pathname === "/" || window.location.pathname === "index.html"
 			}
 		});
 
-	fetch("/api/v1/movies/recent-releases?page=1&pageSize=5")
+	fetch("/api/v1/movies/recent-releases?page=1&pageSize=5", {
+		headers: {'Authorization': 'Bearer ' + token}
+	})
 		.then(response => response.json())
 		.then(data => {
 			for (let i in data) {
@@ -183,7 +194,9 @@ if(window.location.pathname === "/" || window.location.pathname === "index.html"
 	} else if(window.location.pathname === "/recents.html") {
 		endpoint = "/api/v1/movies/recent-releases?page=1&pageSize=25";
 	} else if(window.location.pathname === "/friends.html") {
-		fetch("/api/v1/friendships/" + userId)
+		fetch("/api/v1/friendships/" + userId, {
+			headers: {'Authorization': 'Bearer ' + token}
+		})
 			.then(friendsListResponse => friendsListResponse.json())
 			.then(friendsListData => {
 				let friendsList = document.querySelector(".page header > .container ul.friendslist");
@@ -192,7 +205,9 @@ if(window.location.pathname === "/" || window.location.pathname === "index.html"
 					let friendId;
 					friendsListData[i].userId_1 != userId ? friendId = friendsListData[i].userId_1 : friendId = friendsListData[i].userId_2;
 					
-					fetch("/api/v1/users/" + friendId)
+					fetch("/api/v1/users/" + friendId, {
+						headers: {'Authorization': 'Bearer ' + token}
+					})
 						.then(friendDataResponse => friendDataResponse.json())
 						.then(friendData => {
 							listItem = document.createElement("li");
@@ -203,7 +218,9 @@ if(window.location.pathname === "/" || window.location.pathname === "index.html"
 			});
 		endpoint = "/api/v1/Users/" + userId + "/friendswatching?page=1&pageSize=25";
 	}
-	fetch(endpoint)
+	fetch(endpoint, {
+		headers: {'Authorization': 'Bearer ' + token}
+	})
 		.then(response => response.json())
 		.then(data => {
 			for (let i = 0; i < 25; i++) {
@@ -252,7 +269,9 @@ if(window.location.pathname === "/" || window.location.pathname === "index.html"
 						}
 					});
 
-				fetch("/api/v1/movies/" + data[i].id)
+				fetch("/api/v1/movies/" + data[i].id, {
+					headers: {'Authorization': 'Bearer ' + token}
+				})
 					.then(ratingResponse => ratingResponse.json())
 					.then(ratingData => {
 						let ratingStars = document.querySelectorAll("main section ul li:nth-child(" + (parseInt(i) + 1) + ") .rating .i");
@@ -358,7 +377,9 @@ function showMoviePopup(movieId) {
 		document.body.classList.remove("popup-open");
 	});
 
-	fetch("/api/v1/movies/" + movieId)
+	fetch("/api/v1/movies/" + movieId, {
+		headers: {'Authorization': 'Bearer ' + token}
+	})
 		.then(response => response.json())
 		.then(data => {
 			let title = transformLocalTitle(data.title);
@@ -615,3 +636,7 @@ function getCookie(cname) {
 	return "";
 }
 
+function logout() {
+	document.cookie = "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+	document.location.href = "/login.html";
+}

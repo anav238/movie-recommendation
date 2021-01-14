@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using movie_recommendation.Data;
@@ -27,12 +28,14 @@ namespace movie_recommendation.Controllers
         }
 
         // GET: api/Users
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<User>> GetUsers(int page = 1, int pageSize = 100)
         {
             return _repository.GetAll(page, pageSize).ToList();
         }
 
+        [Authorize]
         [HttpGet("{id}/{friendId}/friendswatching")]
 
         public ActionResult<IEnumerable<Movie>> GetFriendMovies(int id, int friendId, int page = 1, int pageSize = 100)
@@ -45,6 +48,7 @@ namespace movie_recommendation.Controllers
                 return NotFound();
         }
 
+        [Authorize]
         [HttpGet("{id}/friendswatching")]
 
         public ActionResult<IEnumerable<Movie>> GetFriendsMovies(int id, int page = 1, int pageSize = 100)
@@ -61,7 +65,7 @@ namespace movie_recommendation.Controllers
 
 
         // GET: api/Users/5
-
+        [Authorize]
         [HttpGet("{id}")]
         public ActionResult<User> GetById(int id)
         {
@@ -75,6 +79,7 @@ namespace movie_recommendation.Controllers
             return user;
         }
 
+        [Authorize]
         [HttpGet("{id}/recommendations")]
         public ActionResult<IEnumerable<Movie>> GetRecommendationsForUser(int id)
         {
@@ -88,6 +93,7 @@ namespace movie_recommendation.Controllers
             return recommendations.ToList();
         }
 
+        [Authorize]
         [HttpGet("search/{username}")]
         public ActionResult<IEnumerable<User>> GetUsersByUsername(string username, int page = 1, int pageSize = 100)
         {
@@ -177,6 +183,7 @@ namespace movie_recommendation.Controllers
             });
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public ActionResult<User> Update(int id, [FromBody] User user)
         {
@@ -187,7 +194,7 @@ namespace movie_recommendation.Controllers
             return Ok();
         }
 
-
+        [Authorize]
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public ActionResult<User> DeleteUser(int id)
