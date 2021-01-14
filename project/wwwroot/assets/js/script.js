@@ -20,8 +20,7 @@ let fanartKey = "68ec2de67dbfc2250512dc4cfa01ce18";
 let cookie = getCookie("token");
 let userId = cookie[0];
 
-console.log(userId);
-if(!userId) userId = 1; /* se sterge dupa ce imi fac treaba */
+if(!userId) document.location.href = "/login.html";
 
 function transformLocalTitle(text) {
 	text = text.replace(/\s*\(.*?\)\s*/g, "");
@@ -70,7 +69,7 @@ if(window.location.pathname === "/" || window.location.pathname === "index.html"
 					if (tmdbData.backdrop_path) {
 						let header = document.querySelector("header");
 						document.querySelector("nav").classList.add("invert");
-						document.querySelector("header > .container").style.color = "#fff";
+						document.querySelector("header > .container").style.color = "#ffffff";
 						header.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url(https://image.tmdb.org/t/p/original" + tmdbData.backdrop_path + ")";
 					}
 				});
@@ -191,7 +190,7 @@ if(window.location.pathname === "/" || window.location.pathname === "index.html"
 
 				for(let i in friendsListData) {
 					let friendId;
-					friendsListData[i].userId_1 !== userId ? friendId = friendsListData[i].userId_1 : friendId = friendsListData[i].userId_2;
+					friendsListData[i].userId_1 != userId ? friendId = friendsListData[i].userId_1 : friendId = friendsListData[i].userId_2;
 					
 					fetch("/api/v1/users/" + friendId)
 						.then(friendDataResponse => friendDataResponse.json())
@@ -296,8 +295,10 @@ function showMoviePopup(movieId) {
 	let popupContent = document.createElement("div");
 	popupContainer.append(popupContent);
 	popupContent.classList.add("popup-content");
+	popupContent.classList.add("loading");
 
 	popupContent.insertAdjacentHTML("beforeend", `
+		<div class="loading-icon"></div>
 		<div class="popup-content-header">
 			<h1 class="title"></h1>
 			<div class="short-stats">
@@ -313,8 +314,6 @@ function showMoviePopup(movieId) {
 				<div class="director"></div>
 			</div>
 			<a class="watch" href="" rel="noopener noreferrer nofollow" target="_blank">
-				<span class="watch-label"></span>
-				<div class="watch-providers"></div>
 			</a>
 		</div>
 		<div class="popup-content-cast">
@@ -393,6 +392,11 @@ function showMoviePopup(movieId) {
 					}
 				}
 
+				if(!tmdbData.backdrop_path)
+					popupContent.querySelector(".popup-content-header").classList.add("no-backdrop");
+				else
+					popupContent.querySelector(".popup-content-header").style.backgroundImage = "linear-gradient(to right, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.2)), linear-gradient(to left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)), url(https://image.tmdb.org/t/p/original" + tmdbData.backdrop_path + ")";
+
 				if(tmdbData.title) title = tmdbData.title;
 				popupContent.querySelector(".popup-content-header h1.title").innerHTML = title;
 
@@ -400,8 +404,10 @@ function showMoviePopup(movieId) {
 					popupContent.querySelector(".popup-content-header").insertAdjacentHTML("afterbegin", `
 						<img class="logo" src="` + logo + `" alt="` + title + `" />
 					`);
+				else
+					popupContent.querySelector(".popup-content-header").classList.add("no-logo");
 
-				if(tmdbData.release_date) releaseDate = tmdbData.release_date;
+				if(tmdbData.release_date) releaseDate = Intl.DateTimeFormat('ro-RO').format(Date.parse(tmdbData.release_date));
 				popupContent.querySelector(".popup-content-header .short-stats .release-date").innerHTML = releaseDate;
 
 				if(tmdbData.spoken_languages && tmdbData.spoken_languages.length) {
@@ -415,7 +421,7 @@ function showMoviePopup(movieId) {
 
 				popupContent.querySelector(".popup-content-header .short-stats .genres").innerHTML = genres;
 
-				if(tmdbData.duration)
+				if(tmdbData.runtime)
 					popupContent.querySelector(".popup-content-header .short-stats .duration").innerHTML = Math.floor(parseInt(tmdbData.runtime) / 60) + "h " + (parseInt(tmdbData.runtime) % 60) + "m"; 
 				else
 					popupContent.querySelector(".popup-content-header .short-stats .duration").remove();
@@ -447,9 +453,8 @@ function showMoviePopup(movieId) {
 				}
 				if(tmdbData["watch/providers"] && tmdbData["watch/providers"].results.RO) {
 					popupContent.querySelector(".popup-content-header a.watch").href = tmdbData["watch/providers"].results.RO.link;
-					popupContent.querySelector(".popup-content-header a.watch .watch-label").innerHTML = "Available on";
 					for(let i in tmdbData["watch/providers"].results.RO.flatrate) {
-						popupContent.querySelector(".popup-content-header a.watch .watch-providers").insertAdjacentHTML("beforeend", `
+						popupContent.querySelector(".popup-content-header a.watch").insertAdjacentHTML("beforeend", `
 							<img src="https://www.themoviedb.org/t/p/original` + tmdbData["watch/providers"].results.RO.flatrate[i].logo_path + `" alt="` + tmdbData["watch/providers"].results.RO.flatrate[i].provider_name + `" />
 						`)
 					}
@@ -464,7 +469,7 @@ function showMoviePopup(movieId) {
 					popupContent.querySelector(".popup-content-cast").remove();
 				else {
 					popupContent.querySelector(".popup-content-cast h2").innerHTML = "Top Billed Cast";
-					for (let i = 0; i < tmdbData.credits.cast.length && i < 10; i++) {
+					for (let i = 0; i < tmdbData.credits.cast.length && i < 7; i++) {
 						let actorPicture = "assets/img/placeholder.svg";
 						if(tmdbData.credits.cast[i].profile_path)
 							actorPicture = "https://www.themoviedb.org/t/p/w138_and_h175_face/" + tmdbData.credits.cast[i].profile_path;
@@ -518,7 +523,7 @@ function showMoviePopup(movieId) {
 						if(tmdbData.homepage)
 							links.insertAdjacentHTML("beforeend", `
 								<a class="link homepage" href="` + tmdbData.homepage + `" rel="noopener noreferrer nofollow" target="_blank">
-									<i class="i">link</i>
+									<i class="i">public</i>
 								</a>
 							`);
 						if(imdbId)
@@ -529,19 +534,19 @@ function showMoviePopup(movieId) {
 							`);
 						if(tmdbData.external_ids.facebook_id)
 							links.insertAdjacentHTML("beforeend", `
-								<a class="link imdb" href="https://www.facebook.com/` + tmdbData.external_ids.facebook_id + `" rel="noopener noreferrer nofollow" target="_blank">
+								<a class="link facebook" href="https://www.facebook.com/` + tmdbData.external_ids.facebook_id + `" rel="noopener noreferrer nofollow" target="_blank">
 									<img src="assets/img/facebook.svg" alt="Facebook page" />
 								</a>
 							`);
 						if(tmdbData.external_ids.instagram_id)
 							links.insertAdjacentHTML("beforeend", `
-								<a class="link imdb" href="https://www.instagram.com/` + tmdbData.external_ids.instagram_id + `" rel="noopener noreferrer nofollow" target="_blank">
+								<a class="link instagram" href="https://www.instagram.com/` + tmdbData.external_ids.instagram_id + `" rel="noopener noreferrer nofollow" target="_blank">
 									<img src="assets/img/instagram.svg" alt="Instagram page" />
 								</a>
 							`);
 						if(tmdbData.external_ids.twitter_id)
 							links.insertAdjacentHTML("beforeend", `
-								<a class="link imdb" href="https://twitter.com/` + tmdbData.external_ids.twitter_id + `" rel="noopener noreferrer nofollow" target="_blank">
+								<a class="link twitter" href="https://twitter.com/` + tmdbData.external_ids.twitter_id + `" rel="noopener noreferrer nofollow" target="_blank">
 									<img src="assets/img/twitter.svg" alt="Twitter page" />
 								</a>
 							`);
@@ -555,7 +560,7 @@ function showMoviePopup(movieId) {
 					popupContent.querySelector(".popup-content-videos h2").innerHTML = "Videos";
 					for(let i in tmdbData.videos.results)
 						popupContent.querySelector(".popup-content-videos .videos").insertAdjacentHTML("beforeend", `
-							<a style="background-image: url('https://i.ytimg.com/vi/` + tmdbData.videos.results[i].key + `/hqdefault.jpg');" class="video" href="https://www.youtube.com/watch?v=` + tmdbData.videos.results[i].key + `" rel="noopener noreferrer nofollow" target="_blank">
+							<a style="background-image: radial-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.15)), url('https://i.ytimg.com/vi/` + tmdbData.videos.results[i].key + `/hqdefault.jpg');" class="video" href="https://www.youtube.com/watch?v=` + tmdbData.videos.results[i].key + `" rel="noopener noreferrer nofollow" target="_blank">
 								<i class="i">play_arrow</i>
 							</a>
 						`);
@@ -586,6 +591,10 @@ function showMoviePopup(movieId) {
 							</a>
 						`);
 				}
+
+				/* loaded */
+				popupContent.querySelector(".loading-icon").remove();
+				popupContent.classList.remove("loading");
 			});
 		});
 }
