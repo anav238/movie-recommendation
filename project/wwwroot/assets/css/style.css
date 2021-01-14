@@ -169,6 +169,7 @@ header img.poster {
   border-radius: 10px;
   margin-right: 40px;
   box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 nav + * {
   padding-top: 100px;
@@ -191,6 +192,7 @@ header > .container .info .info-main .info-main-title * {
 }
 header > .container .info .info-main .info-main-title h1 {
   font-weight: 700;
+  cursor: pointer;
 }
 header > .container .info .info-main .info-main-title span {
   font-weight: 400;
@@ -243,12 +245,12 @@ header > .container .info .info-user a {
   border-radius: 50px;
   font-size: 14px;
 }
-header > .container .info .info-user a.rating {
+header > .container .info .info-user .rating {
   color: inherit;
   margin-right: 10px;
   opacity: 0.7;
 }
-header > .container .info .info-user a.rating .i {
+header > .container .info .info-user .rating .i {
   font-size: 28px;
 }
 header > .container .info .info-user a .i {
@@ -329,11 +331,13 @@ main section ul li img.poster {
   margin-bottom: 15px;
   box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.2);
   width: 100%;
+  cursor: pointer;
 }
 main section ul li h3 {
   margin: 0 0 4px 0;
   font-size: 18px;
   line-height: 1.25;
+  cursor: pointer;
 }
 main section ul li .rating {
   opacity: 0.7;
@@ -368,6 +372,7 @@ footer {
   width: 150px;
   height: 225px;
   margin:  0 30px 0 0;
+  cursor: pointer;
 }
 .page main section ul li .movie-details {
   display: flex;
@@ -381,6 +386,7 @@ footer {
   display: inline-flex;
   font-size: 24px;
   margin: 0;
+  cursor: pointer;
 }
 .page main section ul li .movie-details .movie-details-title span {
   font-size: 24px;
@@ -400,7 +406,7 @@ footer {
 .page main section ul li .movie-details .movie-details-rating {
   margin: 10px 0;
 }
-.page main section ul li .movie-details .movie-details-rating a.rating {
+.page main section ul li .movie-details .movie-details-rating .rating {
   color: inherit;
 }
 .page main section ul li .movie-details .movie-details-description {
@@ -430,8 +436,21 @@ footer {
 .friends header > .container ul.friendslist li:last-child::after {
   content: "";
 }
-@media only screen and (max-width: 1399px) {
-
+.popup {
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  overflow: auto;
+}
+body.popup-open {
+  overflow: hidden;
+}
+.popup .container {
+  color: #ffffff;
 }
 @media only screen and (max-width: 1199px) {
   header > .container .info {
