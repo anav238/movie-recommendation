@@ -335,6 +335,12 @@ function showMoviePopup(movieId) {
 			<a class="watch" href="" rel="noopener noreferrer nofollow" target="_blank">
 			</a>
 		</div>
+		<div class="popup-content-rating">
+			<div class="rating"></div>
+			<div class="rate-movie">
+				<div class="loading-icon"></div>
+			</div>
+		</div>
 		<div class="popup-content-cast">
 			<h2></h2>
 			<div class="cast">
@@ -385,8 +391,6 @@ function showMoviePopup(movieId) {
 			let title = transformLocalTitle(data.title);
 			let releaseDate = data.title.slice(-5).slice(0, -1);
 			let genres = data.genres.replaceAll("|", ", ").replaceAll("(", "").replaceAll(")", "");
-			let rating = data.rating;
-			let numberOfRatings = data.numberOfRatings;
 
 			let imdbId;
 			if(data.imdbId)
@@ -483,7 +487,72 @@ function showMoviePopup(movieId) {
 				else popupContent.querySelector(".popup-content-header a.watch").remove();
 
 				/* .popup-content-rating */
-				// se implementeaza la final
+				if(data.numberOfRatings) {
+					popupContent.querySelector(".popup-content-rating .rating").insertAdjacentHTML("beforeend", `
+						<div class="rating-title">
+							Overall Rating
+						</div>
+						<div class="rating-number">
+							` + parseFloat(data.rating).toFixed(2) + `
+						</div>
+						<div class="rating-stars">
+						</div>
+						<div class="rating-label">
+							based on ` + Intl.NumberFormat().format(data.numberOfRatings) + ` ratings
+						</div>
+					`);
+					let ratingStars = popupContent.querySelector(".popup-content-rating .rating .rating-stars");
+					if (data.rating >= 1) {
+						for (let i = 0; i < 5; i++) {
+							if (i + 1 <= Math.floor(data.rating))
+								ratingStars.insertAdjacentHTML("beforeend", "<i class=\"i\">star</i>");
+							else if (i === Math.floor(data.rating) && data.rating - Math.floor(data.rating) >= 0.5)
+								ratingStars.insertAdjacentHTML("beforeend", "<i class=\"i\">star_half</i>");
+							else 
+								ratingStars.insertAdjacentHTML("beforeend", "<i class=\"i\">star_outline</i>");
+						}
+					}
+					fetch("/api/v1/ratings/" + userId + "/" + movieId, {
+						headers: {'Authorization': 'Bearer ' + token}
+					})
+						.then(userResponse => userResponse.json())
+						.then(userData => {
+							popup.querySelector(".popup-content-rating .rate-movie").innerHTML = `
+								<div class="user-rating"></div>
+								<div class="rate-buttons"></div>
+							`;
+							if(userData.rating) {
+								popupContent.querySelector(".popup-content-rating .rate-movie .user-rating").innerHTML = "You rated this movie with <span>" + userData.rating + "</span> stars.";
+							}
+							else {
+								popupContent.querySelector(".popup-content-rating .rate-movie .user-rating").innerHTML = "You didn't rate this movie yet.";
+							}
+							let rateButtons = popupContent.querySelector(".popup-content-rating .rate-movie .rate-buttons");
+							for(let i = 1; i <= 5; i += 0.5) {
+								let rateButton = document.createElement("a");
+								rateButtons.append(rateButton);
+								rateButton.classList.add("rate-button");
+								rateButton.innerHTML = "<i class=\"i ii\">star</i>" + i;
+								if(userData.rating == i)
+									rateButton.classList.add("selection");
+								rateButton.addEventListener("click", () => {
+									if(rateButton.classList.contains("selection")) {
+										rateButton.classList.remove("selection");
+										popupContent.querySelector(".popup-content-rating .rate-movie .user-rating").innerHTML = "You didn't rate this movie yet.";
+										// deleteUserRating(userId, movieId);
+									}
+									else {
+										let selection = rateButtons.querySelector("a.selection")
+										if(selection) selection.classList.remove("selection");
+										rateButton.classList.add("selection");
+										popupContent.querySelector(".popup-content-rating .rate-movie .user-rating").innerHTML = "You rated this movie with <span>" + i + "</span> stars.";
+										// postRating(userId, movieId, i);
+									}
+								});
+							}
+						});
+				}
+
 
 				/* .popup-content-cast */
 				if(!tmdbData.credits || !tmdbData.credits.cast.length)
@@ -639,4 +708,89 @@ function getCookie(cname) {
 function logout() {
 	document.cookie = "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 	document.location.href = "/login.html";
+}
+
+function search_user(keyword) {
+	fetch("/api/v1/users/search/" + keyword, {
+		headers: {'Authorization': 'Bearer ' + token}
+	})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			return data;
+		});
+}
+
+function search_movie_by_title(keyword) {
+	fetch("/api/v1/movies/search/" + keyword, {
+		headers: {'Authorization': 'Bearer ' + token}
+	})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			return data;
+		});
+}
+
+function search_movie_by_genre(genre) {
+	fetch("/api/v1/movies/genre=" + genre, {
+		headers: {'Authorization': 'Bearer ' + token}
+	})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			return data;
+		});
+}
+
+function deleteUserRating(userId, movieId) {
+	fetch("/api/v1/ratings/" + userId + "/" + movieId, {
+		method: "DELETE",
+		headers: {'Authorization': 'Bearer ' + token}
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+	});
+}
+
+function postRating(_userId, _movieId, _rating) {
+	let current_date_time = new Date();
+	let _ratingBody = {
+        userId: parseInt(_userId),
+		movieId: parseInt(_movieId),
+		rating: parseFloat(_rating), 
+		timestamp: current_date_time
+    }
+
+	fetch("/api/v1/ratings", {
+        method: "POST",
+		body: JSON.stringify(_ratingBody), headers: { 
+			'Authorization': 'Bearer ' + token,
+			"Content-type": "application/json; charset=UTF-8",
+	 	}
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+	});
+}
+
+function addFriend(_userId, _friendId) {
+	let _friendshipBody = {
+        UserId_1: parseInt(_userId),
+		UserId_2: parseInt(_friendId)
+    }
+
+	fetch("/api/v1/friendships", {
+        method: "POST",
+		body: JSON.stringify(_friendshipBody), headers: { 
+			'Authorization': 'Bearer ' + token,
+			"Content-type": "application/json; charset=UTF-8",
+	 	}
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+	});
 }

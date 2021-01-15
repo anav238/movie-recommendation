@@ -95,7 +95,7 @@ namespace movie_recommendation.Controllers
 
         [Authorize]
         [HttpGet("search/{username}")]
-        public ActionResult<IEnumerable<User>> GetUsersByUsername(string username, int page = 1, int pageSize = 100)
+        public ActionResult<IEnumerable<string>> GetUsersByUsername(string username, int page = 1, int pageSize = 100)
         {
             var users = _userRepository.GetUsersByUsername(username, page, pageSize).ToList();
 
@@ -104,7 +104,11 @@ namespace movie_recommendation.Controllers
                 return NotFound();
             }
 
-            return Ok(users);
+            List<string> userIds = new List<string>();
+            for (int i = 0; i < users.Count(); i++)
+                userIds.Add(users[i].Username);
+
+            return Ok(userIds);
         }
 
         // POST: api/Users

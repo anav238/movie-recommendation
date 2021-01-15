@@ -57,7 +57,7 @@ namespace movie_recommendation.Data
         public IEnumerable<Movie> GetMoviesByTitle(string title, int page, int pageSize)
         {
             return _context.Movies
-                .Where(movie => movie.Title.Contains(title)).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                .Where(movie => movie.Title.ToLower().Contains(title.ToLower())).Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
         }
 
