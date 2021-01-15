@@ -56,13 +56,17 @@ namespace movie_recommendation.Controllers
             catch (Exception)
             {
                 if (_repository.GetRating(rating.userId, rating.movieId) != null)
-                  return  Conflict();
+                {
+                    Rating db_rating = _repository.GetRating(rating.userId, rating.movieId);
+                    _repository.Remove(db_rating);
+                    _repository.Create(rating);
+                }
                 else
                     throw;
             }
 
             var movie = _movieRepository.GetById(rating.movieId);
-            movie.Rating = ((float)rating.rating + movie.Rating) / (movie.NumberOfRatings + 1);
+            movie.Rating = ((float)rating.rating + movie.Rating * movie.NumberOfRatings) / (movie.NumberOfRatings + 1);
             movie.NumberOfRatings = movie.NumberOfRatings + 1;
             _movieRepository.Update(movie);
             return CreatedAtAction("GetRating", new { userId = rating.userId, movieId = rating.movieId }, rating);
@@ -97,6 +101,19 @@ namespace movie_recommendation.Controllers
             return rating;
         }
 
-        
+        [HttpPut]
+        public ActionResult<Rating> UpdateRating([FromBody] Rating _rating)
+        {
+           /* var rating = _repository.GetRating(_rating.userId, _rating.movieId);
+            if (rating == null)
+            {
+                return NotFound();
+            }*/
+
+            _repository.Update(_rating);
+            return _rating;
+        }
+
+
     }
 }

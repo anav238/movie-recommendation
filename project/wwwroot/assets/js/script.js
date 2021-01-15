@@ -326,9 +326,14 @@ if(window.location.pathname === "/" || window.location.pathname === "index.html"
 				usersResults.innerHTML = "";
 				if(data.length) {
 					messageBoxUsers.innerHTML = data.length + " users found";
-					for(let user of data)
-						usersResults.insertAdjacentHTML("beforeend", "<li>" + user.item2 + "<i class='i' onclick='addFriend(" + userId
-											+ "," + user.item1 + ")'>person_add</i></li>");
+					for(let user of data) {
+						usersResults.insertAdjacentHTML("beforeend", "<li>" + user.item2 + "<i class='i'>person_add</i></li>");
+						let userRowButton = usersResults.querySelector("li:last-child i");
+						userRowButton.addEventListener("click", () => {
+							addFriend(userId, user.item1);
+							userRowButton.remove();
+						});
+					}
 				}
 				else {
 					messageBoxUsers.innerHTML = "No users found";
@@ -595,14 +600,17 @@ function showMoviePopup(movieId) {
 									if(rateButton.classList.contains("selection")) {
 										rateButton.classList.remove("selection");
 										popupContent.querySelector(".popup-content-rating .rate-movie .user-rating").innerHTML = "You didn't rate this movie yet.";
-										// deleteUserRating(userId, movieId);
+										//deleteUserRating(userId, movieId);
 									}
 									else {
 										let selection = rateButtons.querySelector("a.selection")
 										if(selection) selection.classList.remove("selection");
 										rateButton.classList.add("selection");
 										popupContent.querySelector(".popup-content-rating .rate-movie .user-rating").innerHTML = "You rated this movie with <span>" + i + "</span> stars.";
-										// postRating(userId, movieId, i);
+										if(!userData.rating)
+											postRating(userId, movieId, i);
+										/*else 
+											updateRating(userId, movieId, i);*/
 									}
 								});
 							}
@@ -798,6 +806,29 @@ function postRating(_userId, _movieId, _rating) {
 		console.log(data);
 	});
 }
+
+function updateRating(_userId, _movieId, _rating) {
+	let current_date_time = new Date();
+	let _ratingBody = {
+        userId: parseInt(_userId),
+		movieId: parseInt(_movieId),
+		rating: parseFloat(_rating), 
+		timestamp: current_date_time
+    }
+
+	fetch("/api/v1/ratings", {
+        method: "PUT",
+		body: JSON.stringify(_ratingBody), headers: { 
+			'Authorization': 'Bearer ' + token,
+			"Content-type": "application/json; charset=UTF-8",
+	 	}
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+	});
+}
+
 
 function addFriend(_userId, _friendId) {
 	let _friendshipBody = {

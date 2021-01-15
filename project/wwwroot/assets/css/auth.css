@@ -91,9 +91,18 @@ main .error {
   color: #d32f2f;
   font-weight: 500;
 }
+main .error_signup {
+  width: 320px;
+  text-align: center;
+  font-size: 14px;
+  color: #d32f2f;
+  font-weight: 500;
+}
+
 main form input[type="submit"][value="Sign up"] {
   background-color: #2e7d32;
 }
 main form input[type="submit"][value="Sign up"]:hover {
   background-color: #388e3c;
 }
+

@@ -1,4 +1,5 @@
-﻿using movie_recommendation.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using movie_recommendation.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,6 +31,7 @@ namespace movie_recommendation.Data
         public void Remove(T entity)
         {
             _context.Set<T>().Remove(entity);
+            _context.Entry(entity).State = EntityState.Modified;
             _context.SaveChanges();
         }
 

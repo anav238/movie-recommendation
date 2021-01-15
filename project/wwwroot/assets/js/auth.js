@@ -60,11 +60,11 @@ function register_user() {
     var userName = document.getElementById("username").value;
     var password = document.getElementById("password").value;
 
-    var error_name = document.getElementById("error_username");
-    var error_password = document.getElementById("error_password");
-
+    // var error_name = document.getElementById("error_username");
+    //var error_password = document.getElementById("error_password");
+    var error_password = "";
+    var error_signup = document.querySelector("main .error_signup");
     var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
- 
     let _user = {
         username: userName,
         password: password
@@ -77,27 +77,28 @@ function register_user() {
         .then(response => response.json())
         .then(data => {
             if (data.message == "username exist") {
-               // error_name.textContent = "Username used"
+                error_signup.textContent = "Username used";
                 //error_name.style.color = "red"
             }
             else if (data.message == "Failed") {
-                //error_name.textContent = "Complete all field"
+                error_signup.textContent = "Complete all fields";
                 //error_name.style.color = "red"
             }
             else {
-                //error_name.textContent = ""
+                error_signup.textContent = "";
             }
 
-            if (password.match(passw)) {
-                //error_password.textContent = ""
-            }
-            else {
-               // error_password.textContent = "password between 6 to 20 characters, one numeric digit, one uppercase and one lowercase letter "
+            if (!password.match(passw)) {
+                error_signup.textContent = "password between 6 to 20 characters, one numeric digit, one uppercase and one lowercase letter ";
+                error_password = "password between 6 to 20 characters, one numeric digit, one uppercase and one lowercase letter ";
                 //error_password.style.color = "red"
             }
+            else {
+                error_password = "";
+            }
 
-
-            //if (error_name.textContent == "" && error_password.textContent == "") {
+            console.log(error_password + " " + error_signup);
+            if (error_signup.textContent == "" && error_password == "") {
 
 
                 fetch("/api/v1/Users", {
@@ -107,15 +108,16 @@ function register_user() {
                     .then(response => response.json())
                     .then(json => {
                         console.log(json);
-                        var cookie_value = json.id + " " + data.token;
-                        setCookie("token", cookie_value);
+                        var cokie_value = json.id + " " + data.token;
+                        setCookie("token", cokie_value);
                         document.location.href = "/";
                     });
 
-            //}
+            }
         });
     //document.getElementById("display").innerHTML = result;
 }
+
 
 
 

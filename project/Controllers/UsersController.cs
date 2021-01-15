@@ -120,6 +120,7 @@ namespace movie_recommendation.Controllers
         {
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
             user.Password = hashedPassword;
+            user.Id = _userRepository.GetBiggestId() + 1; 
             _repository.Create(user);
             return CreatedAtAction("GetById", new { id = user.Id }, user);
         }

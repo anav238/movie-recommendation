@@ -487,6 +487,13 @@ footer {
   cursor: pointer;
   padding: 15px 50px;
 }
+.search main section#users ul li {
+  flex-direction: row;
+  justify-content: space-between;
+}
+.search main section#users ul li i {
+  font-size: 21px;
+}
 .search main section ul li:nth-child(odd) {
   background: rgba(0, 0, 0, 0.03);
 }

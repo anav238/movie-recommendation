@@ -58,6 +58,7 @@ namespace movie_recommendation.Data
         {
             return _context.Movies.ToList()
                 .OrderByDescending(movie => movie.NumberOfRatings / movie.Rating).Skip((page - 1) * pageSize).Take(pageSize);
+        }
 
         public IEnumerable<Movie> GetMoviesByTitle(string title, int page, int pageSize)
         {

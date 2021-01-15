@@ -20,5 +20,7 @@ namespace movie_recommendation.Data
         IEnumerable<Movie> GetRecommendedMovies(int id);
 
         IEnumerable<User> GetUsersByUsername(string username, int page, int pageSize);
+
+        public int GetBiggestId();
     }
 }

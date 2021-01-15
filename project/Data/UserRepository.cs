@@ -41,10 +41,10 @@ namespace movie_recommendation.Data
 
             var user = _context.Users.SingleOrDefault(x => x.Username == username);
 
-            bool verified = BCrypt.Net.BCrypt.Verify(password, user.Password);
-
             if (user == null)
                 return null;
+
+            bool verified = BCrypt.Net.BCrypt.Verify(password, user.Password);
 
             if (verified == false)
                 return null;
@@ -114,6 +114,11 @@ namespace movie_recommendation.Data
         {
             return _context.Users
                 .Where(user => user.Username.Contains(username)).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        public int GetBiggestId()
+        {
+            return _context.Users.OrderByDescending(user => user.Id).First().Id;
         }
     }
 }
