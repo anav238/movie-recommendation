@@ -18,13 +18,14 @@ namespace movie_recommendation.Controllers
     {
         private readonly IRepository<User> _repository;
         private readonly IUserRepository _userRepository;
+        private readonly IMovieRepository _movieRepository;
 
 
-
-        public UsersController(IRepository<User> repository, IUserRepository userRepository)
+        public UsersController(IRepository<User> repository, IUserRepository userRepository, IMovieRepository movieRepository)
         {
             _repository = repository;
             _userRepository = userRepository;
+            _movieRepository = movieRepository;
         }
 
         // GET: api/Users
@@ -85,9 +86,9 @@ namespace movie_recommendation.Controllers
         {
             var recommendations = _userRepository.GetRecommendedMovies(id);
 
-            if (recommendations == null)
+            if (recommendations == null || recommendations.ToList().Count == 0)
             {
-                return NotFound();
+                return _movieRepository.GetBestRatedMovies(1, 25).ToList();
             }
 
             return recommendations.ToList();

@@ -36,7 +36,7 @@ namespace ModelTraining
             SQLiteConnection sqlite_conn;
             // Create a new database connection:
             sqlite_conn = new SQLiteConnection(GetConnectionString());
-         // Open the connection:
+            // Open the connection:
             try
             {
                 sqlite_conn.Open();
@@ -53,36 +53,38 @@ namespace ModelTraining
         {
             // To avoid storing the connection string in your code,
             // you can retrieve it from a configuration file.
-            return @"Data Source='..\..\..\..\project\movierecommendationapp.db'";
+            return @"Data Source='..\..\..\movierecommendationapp.db'";
         }
 
         public static (IDataView training, IDataView test) LoadData()
         {
             DatabaseLoader loader = mlContext.Data.CreateDatabaseLoader<Rating>();
             string connectionString = @"Data Source='..\..\..\movierecommendationapp.db'";
-            string command = "SELECT * FROM Ratings";
+            IDataView data;
+            myRatings = new List<Rating>();
+            int offset = 0;
 
-            DatabaseSource dbSource = new DatabaseSource(SqliteFactory.Instance, connectionString, command);
-            IDataView data = loader.Load(dbSource);
-            ratings = data.ToDataTable();
+            do
+            {
+                string command = "SELECT * FROM Ratings LIMIT 100 OFFSET " + offset;
+                offset += 100;
+                DatabaseSource dbSource = new DatabaseSource(SqliteFactory.Instance, connectionString, command);
+                data = loader.Load(dbSource);
+                ratings = data.ToDataTable();
+                if (ratings.Rows.Count == 0)
+                    break;
+                if (offset % 100000 == 0)
+                    Console.Write(offset + " ");
+                myRatings.AddRange(ratings.Rows.Cast<DataRow>()
+                        .Select(r => new Rating()
+                        {
+                            userId = Int32.Parse(r.Field<String>("userId")),
+                            movieId = Int32.Parse(r.Field<String>("movieId")),
+                            rating = float.Parse(r.Field<String>("rating"))
+                        }).ToList());
+            } while (offset < 25000000);
 
-            myRatings = ratings.Rows.Cast<DataRow>()
-                    .Select(r => new Rating()
-                    {
-                        userId = Int32.Parse(r.Field<String>("userId")),
-                        movieId = Int32.Parse(r.Field<String>("movieId")),
-                        rating = float.Parse(r.Field<String>("rating"))
-                    }).ToList();
-
-            string commandUsers = "SELECT DISTINCT userId FROM Ratings";
-            DatabaseSource dbSourceUsers = new DatabaseSource(SqliteFactory.Instance, connectionString, commandUsers);
-            users = data.ToDataTable();
-            myUsers = users.Rows.Cast<DataRow>().Select((r => new Rating()
-                    {
-                        userId = Int32.Parse(r.Field<String>("userId")),
-                        movieId = Int32.Parse(r.Field<String>("movieId")),
-                        rating = float.Parse(r.Field<String>("rating"))
-                    })).ToList();
+            data = mlContext.Data.LoadFromEnumerable<Rating>(myRatings);
 
             DataOperationsCatalog.TrainTestData dataSplit = mlContext.Data.TrainTestSplit(data, testFraction: 0.2);
             return (dataSplit.TrainSet, dataSplit.TestSet);
@@ -98,7 +100,7 @@ namespace ModelTraining
                 MatrixColumnIndexColumnName = "userIdEncoded",
                 MatrixRowIndexColumnName = "movieIdEncoded",
                 LabelColumnName = "rating",
-                NumberOfIterations = 5,
+                NumberOfIterations = 20,
                 ApproximationRank = 100
             };
 
@@ -122,31 +124,35 @@ namespace ModelTraining
 
         public static List<int> UseModelForSinglePrediction(MLContext mlContext, ITransformer model, int id)
         {
-            Console.WriteLine("=============== Making a prediction ===============");
+            //Console.WriteLine("=============== Making a prediction ===============");
             var predictionEngine = mlContext.Model.CreatePredictionEngine<Rating, RatingPrediction>(model);
 
-            Console.WriteLine("Calculating the top 5 movies for user " + id.ToString());
-            
-            var top5 = (from m in myRatings
+           // Console.WriteLine("Calculating the top 25 movies for user " + id.ToString());
+
+            List<int> movieIds = (from m in myRatings select m.movieId).Distinct().ToList();
+            var top = (from _movieId in movieIds
                         let p = predictionEngine.Predict(
                            new Rating()
                            {
                                userId = id,
-                               movieId = m.movieId
+                               movieId = _movieId
                            })
                         orderby p.score descending
-                        select (MovieId: m.movieId, Score: p.score)).Take(5);
+                        select (MovieId: _movieId, Score: p.score)).Take(25);
 
             List<int> recommendedMovieIds = new List<int>();
-            foreach (var t in top5)
+            foreach (var t in top)
+            {
                 recommendedMovieIds.Add(t.MovieId);
+                //Console.WriteLine(t.MovieId + " " + t.Score);
+            }
             return recommendedMovieIds;
         }
 
         public static void SaveModel(MLContext mlContext, DataViewSchema trainingDataViewSchema, ITransformer model)
         {
             System.IO.Directory.CreateDirectory(Path.Combine(Environment.CurrentDirectory, "Data"));
-            var modelPath = Path.Combine(Environment.CurrentDirectory, "Data", "MovieRecommenderModel4.zip");
+            var modelPath = Path.Combine(Environment.CurrentDirectory, "Data", "MovieRecommenderModel7.zip");
 
             Console.WriteLine("=============== Saving the model to a file ===============");
             mlContext.Model.Save(model, trainingDataViewSchema, modelPath);
@@ -156,27 +162,35 @@ namespace ModelTraining
         public static void SavePredictionsToDb(MLContext mlContext, ITransformer model)
         {
             //var users = (from m in myUsers select m);
-            int users = 500;
+            //int users = 500;
             //List<(int, int)> userRecommendations = new List<(int, int)>();
             SQLiteConnection connection = OpenSqlConnection();
-            for (int i = 1; i <= users; i++)
+            List<int> utilizatori = (from m in myRatings select m.userId).Distinct().ToList();
+            /*SQLiteCommand myComm = connection.CreateCommand();
+            myComm.CommandText = @"SELECT Id FROM Users";
+            SQLiteDataReader r = myComm.ExecuteReader();
+            while (r.Read())
             {
-                List<int> recommendedMovieIds = UseModelForSinglePrediction(mlContext, model, i);
-                foreach (var recommendation in recommendedMovieIds) {
+                utilizatori.Add(Convert.ToInt32(r["Id"]));
+            }*/
+            for (int i = 0; i < utilizatori.Count; i++)
+            {
+                List<int> recommendedMovieIds = UseModelForSinglePrediction(mlContext, model, utilizatori[i]);
+                foreach (var recommendation in recommendedMovieIds)
+                {
                     string query = "INSERT INTO Recommendations (userId, movieId)";
                     query += " VALUES (@u_id, @m_id)";
 
                     SQLiteCommand myCommand = new SQLiteCommand(query, connection);
-                    myCommand.Parameters.AddWithValue("@u_id", i);
+                    myCommand.Parameters.AddWithValue("@u_id", utilizatori[i]);
                     myCommand.Parameters.AddWithValue("@m_id", recommendation);
                     myCommand.ExecuteNonQuery();
-                    Console.WriteLine(recommendation);
+                    //Console.WriteLine(recommendation);
                 }
             }
-            
-         
+
         }
 
-      
+
     }
 }

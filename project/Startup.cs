@@ -61,6 +61,11 @@ namespace movie_recommendation
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
+            })
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/login";
+                options.LogoutPath = "/logout";
             });
         }
 
