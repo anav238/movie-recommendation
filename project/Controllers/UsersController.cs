@@ -117,6 +117,8 @@ namespace movie_recommendation.Controllers
         [HttpPost]
         public ActionResult<User> Create([FromBody] User user)
         {
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
+            user.Password = hashedPassword;
             _repository.Create(user);
             return CreatedAtAction("GetById", new { id = user.Id }, user);
         }
@@ -124,67 +126,43 @@ namespace movie_recommendation.Controllers
         [HttpPost("authenticate")]
         public ActionResult<User> Authenticate([FromBody] User user)
         {
-            var user_status = _userRepository.Authenticate(user.Username, user.Password);
-            if (user_status == "Failed")
+            var userStatus = _userRepository.Authenticate(user.Username, user.Password);
+            if (userStatus == "Failed")
             {
                 return BadRequest(new { message = "Failed" });
             }
-            if (user_status == "User exists")
+            if (userStatus == "User exists")
             {
                 return BadRequest(new { message = "username exist" });
             }
 
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("My-Top-Secret-Password");
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                    {
-                        new Claim(ClaimTypes.Name, user.Id.ToString())
-                    }),
-                Expires = DateTime.UtcNow.AddMinutes(2),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
+            var tokenString = _userRepository.Token(user.Username);
 
             return Ok(new
             {
-                username = user.Username,
+                Username = user.Username,
                 password = user.Password,
                 Token = tokenString
             });
         }
 
-
+        [AllowAnonymous]
         [HttpPost("login")]
-        public ActionResult<User> Login([FromBody] User user)
+        public IActionResult Login([FromBody] User user)
         {
-            var user_log = _userRepository.Login(user.Username, user.Password);
-            if (user_log == null)
+            var userRegistered = _userRepository.Login(user.Username, user.Password);
+            if (userRegistered == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("My-Top-Secret-Password");
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddHours(6),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
+            var tokenString = _userRepository.Token(userRegistered.Username);
 
             return Ok(new
             {
-                Id = user_log.Id,
-                Username = user_log.Username,
+                Id = userRegistered.Id,
+                Username = userRegistered.Username,
                 Token = tokenString
             });
+
         }
 
         [Authorize]
