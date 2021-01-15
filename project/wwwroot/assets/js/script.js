@@ -762,39 +762,6 @@ function logout() {
 	document.location.href = "/login.html";
 }
 
-function search_user(keyword) {
-	fetch("/api/v1/users/search/" + keyword, {
-		headers: {'Authorization': 'Bearer ' + token}
-	})
-		.then(response => response.json())
-		.then(data => {
-			console.log(data);
-			return data;
-		});
-}
-
-function search_movie_by_title(keyword) {
-	fetch("/api/v1/movies/search/" + keyword, {
-		headers: {'Authorization': 'Bearer ' + token}
-	})
-		.then(response => response.json())
-		.then(data => {
-			console.log(data);
-			return data;
-		});
-}
-
-function search_movie_by_genre(genre) {
-	fetch("/api/v1/movies/genre=" + genre, {
-		headers: {'Authorization': 'Bearer ' + token}
-	})
-		.then(response => response.json())
-		.then(data => {
-			console.log(data);
-			return data;
-		});
-}
-
 function deleteUserRating(userId, movieId) {
 	fetch("/api/v1/ratings/" + userId + "/" + movieId, {
 		method: "DELETE",
