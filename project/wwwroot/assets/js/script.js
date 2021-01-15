@@ -215,6 +215,7 @@ if(window.location.pathname === "/" || window.location.pathname === "index.html"
 							friendsList.appendChild(listItem);
 						});
 				}
+				// console.log(friendsListData);
 			});
 		endpoint = "/api/v1/Users/" + userId + "/friendswatching?page=1&pageSize=25";
 	}
@@ -326,11 +327,14 @@ if(window.location.pathname === "/" || window.location.pathname === "index.html"
 				if(data.length) {
 					messageBoxUsers.innerHTML = data.length + " users found";
 					for(let user of data)
-						usersResults.insertAdjacentHTML("beforeend", "<li>" + user + "</li>");
+						usersResults.insertAdjacentHTML("beforeend", "<li>" + user.item2 + "<i class='i' onclick='addFriend(" + userId
+											+ "," + user.item1 + ")'>person_add</i></li>");
 				}
 				else {
 					messageBoxUsers.innerHTML = "No users found";
 				}
+				console.log(data);
+				
 			});
 		}
 		else {

@@ -95,7 +95,7 @@ namespace movie_recommendation.Controllers
 
         [Authorize]
         [HttpGet("search/{username}")]
-        public ActionResult<IEnumerable<string>> GetUsersByUsername(string username, int page = 1, int pageSize = 100)
+        public ActionResult<IEnumerable<Tuple<int,string>>> GetUsersByUsername(string username, int page = 1, int pageSize = 100)
         {
             var users = _userRepository.GetUsersByUsername(username, page, pageSize).ToList();
 
@@ -104,9 +104,9 @@ namespace movie_recommendation.Controllers
                 return NotFound();
             }
 
-            List<string> userIds = new List<string>();
+            List<Tuple<int,string>> userIds = new List<Tuple<int,string>>();
             for (int i = 0; i < users.Count(); i++)
-                userIds.Add(users[i].Username);
+                userIds.Add(new Tuple<int, string>(users[i].Id, users[i].Username));
 
             return Ok(userIds);
         }

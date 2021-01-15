@@ -91,7 +91,7 @@ namespace movie_recommendation.Data
                                 join friend in _context.Friendships on rating.userId equals friend.UserId_2
                                 join movie in _context.Movies on rating.movieId equals movie.Id
                                 where friend.UserId_1 == id
-                                select movie).Skip((page - 1) * pageSize).Take(pageSize);
+                                select movie).Distinct().Skip((page - 1) * pageSize).Take(pageSize);
 
             return friendsMovies;
         }

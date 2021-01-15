@@ -373,6 +373,7 @@ footer {
   height: 225px;
   margin:  0 30px 0 0;
   cursor: pointer;
+  flex-shrink: 0;
 }
 .page main section ul li .movie-details {
   display: flex;
