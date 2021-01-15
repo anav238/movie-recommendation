@@ -54,5 +54,11 @@ namespace movie_recommendation.Data
                 .OrderByDescending(movie => condition(movie.Title)? movie.Title.Substring(movie.Title.LastIndexOf("(")) : null ).Skip((page - 1) * pageSize).Take(pageSize);
         }
 
+        public IEnumerable<Movie> GetBestRatedMovies(int page, int pageSize)
+        {
+            return _context.Movies.ToList()
+                .OrderByDescending(movie => movie.NumberOfRatings / movie.Rating).Skip((page - 1) * pageSize).Take(pageSize);
+        }
+
     }
 }
