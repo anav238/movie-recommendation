@@ -4,20 +4,6 @@ console.log("id user: " + cokie[0])
 console.log("token: " + cokie[1])
 
 
-//token after login
-/*if (document.cookie !== undefined && document.cookie !== "") {
-    alert("Welcome again ");
-    fetch('/api/v1/Users/1', {
-        headers: { 'Authorization': 'Bearer ' + cokie[1] }
-    })
-        .then(response => response.json())
-        .then(json => {
-            document.getElementById("display").innerHTML = json.username;
-        });
-} else {
-    alert("Login");
-}*/
-
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
@@ -34,6 +20,12 @@ function getCookie(cname) {
     return "";
 }
 
+function setCookie(cookieName, cookieValue) {
+    var d = new Date();
+    d.setTime(d.getTime() + (24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
+}
 
 function login_user() {
     var userName = document.getElementById("username").value;
@@ -45,8 +37,6 @@ function login_user() {
         password: password
     }
 
-
-
     fetch("/api/v1/Users/login", {
         method: "POST",
         body: JSON.stringify(_user), headers: { "Content-type": "application/json; charset=UTF-8" }
@@ -56,16 +46,10 @@ function login_user() {
             if (data.message == "Username or password is incorrect") {
                 error_login.textContent = "Incorrect username or password.";
             }
-            else {
-                error_login.textContent = ""
-            }
-
-            if (error_login.textContent == "") {
-                console.log()
-                var d = new Date();
-                d.setTime(d.getTime() + (24 * 60 * 60 * 1000));
-                var expires = "expires=" + d.toUTCString();
-                document.cookie = "token" + "=" + data.id + " " + data.token + ";" + expires + ";path=/";
+            else
+            {
+                var cookie_value = data.id + " " + data.token;
+                setCookie("token", cookie_value);
                 document.location.href = "/";
             }
         });
@@ -80,7 +64,7 @@ function register_user() {
     var error_password = document.getElementById("error_password");
 
     var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-    result = userName + " " + password;
+ 
     let _user = {
         username: userName,
         password: password
@@ -115,23 +99,16 @@ function register_user() {
 
             //if (error_name.textContent == "" && error_password.textContent == "") {
 
-                let _data = {
-                    username: userName,
-                    password: password
-                }
 
                 fetch("/api/v1/Users", {
                     method: "POST",
-                    body: JSON.stringify(_data), headers: { "Content-type": "application/json; charset=UTF-8" }
+                    body: JSON.stringify(_user), headers: { "Content-type": "application/json; charset=UTF-8" }
                 })
                     .then(response => response.json())
                     .then(json => {
                         console.log(json);
-
-                        var d = new Date();
-                        d.setTime(d.getTime() + (24 * 60 * 60 * 1000));
-                        var expires = "expires=" + d.toUTCString();
-                        document.cookie = "token" + "=" + json.id + " " + data.token + ";" + expires + ";path=/";
+                        var cookie_value = json.id + " " + data.token;
+                        setCookie("token", cookie_value);
                         document.location.href = "/";
                     });
 

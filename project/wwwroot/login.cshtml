@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="assets/css/auth.css" rel="stylesheet" />
+    <link rel="icon" href="assets/img/icon.svg"/>
+    <title>Log in - Raccoon Cinema</title>
+</head>
+<body>
+    <main>
+        <h1 class="title">Raccoon Cinema</h1>
+        <form onsubmit="event.preventDefault()">
+            <h1>Log in to your account</h1>
+            <span class="error"></span>
+            <div>
+                <label for="username">Username</label>
+                <input type="text" id="username" autocapitalize="none" autocomplete="on" autocorrect="off" spellcheck="false" autofocus>
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password">
+            </div>
+           <input type="submit" value="Log in" onclick="login_user()">
+           <a href="signup.html">Create a new account</a>
+        </form>
+    </main>
+    <script src="assets/js/auth.js"></script>
+</body>
+</html>

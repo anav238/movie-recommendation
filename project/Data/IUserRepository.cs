@@ -12,10 +12,13 @@ namespace movie_recommendation.Data
 
         public User Login(string username, string password);
 
+        public string Token(string username);
         IEnumerable<Movie> GetFriendsMovies(int id, int page, int pageSize);
         IEnumerable<Movie> GetFriendMovies(int id, int friendId, int page, int pageSize);
 
         Friendship GetFriendship(int id, int friendId);
         IEnumerable<Movie> GetRecommendedMovies(int id);
+
+        IEnumerable<User> GetUsersByUsername(string username, int page, int pageSize);
     }
 }

@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using movie_recommendation.Data;
@@ -28,12 +29,14 @@ namespace movie_recommendation.Controllers
         }
 
         // GET: api/Users
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<User>> GetUsers(int page = 1, int pageSize = 100)
         {
             return _repository.GetAll(page, pageSize).ToList();
         }
 
+        [Authorize]
         [HttpGet("{id}/{friendId}/friendswatching")]
 
         public ActionResult<IEnumerable<Movie>> GetFriendMovies(int id, int friendId, int page = 1, int pageSize = 100)
@@ -46,6 +49,7 @@ namespace movie_recommendation.Controllers
                 return NotFound();
         }
 
+        [Authorize]
         [HttpGet("{id}/friendswatching")]
 
         public ActionResult<IEnumerable<Movie>> GetFriendsMovies(int id, int page = 1, int pageSize = 100)
@@ -62,7 +66,7 @@ namespace movie_recommendation.Controllers
 
 
         // GET: api/Users/5
-
+        [Authorize]
         [HttpGet("{id}")]
         public ActionResult<User> GetById(int id)
         {
@@ -76,6 +80,7 @@ namespace movie_recommendation.Controllers
             return user;
         }
 
+        [Authorize]
         [HttpGet("{id}/recommendations")]
         public ActionResult<IEnumerable<Movie>> GetRecommendationsForUser(int id)
         {
@@ -89,12 +94,32 @@ namespace movie_recommendation.Controllers
             return recommendations.ToList();
         }
 
+        [Authorize]
+        [HttpGet("search/{username}")]
+        public ActionResult<IEnumerable<Tuple<int,string>>> GetUsersByUsername(string username, int page = 1, int pageSize = 100)
+        {
+            var users = _userRepository.GetUsersByUsername(username, page, pageSize).ToList();
+
+            if (users.Count() == 0)
+            {
+                return NotFound();
+            }
+
+            List<Tuple<int,string>> userIds = new List<Tuple<int,string>>();
+            for (int i = 0; i < users.Count(); i++)
+                userIds.Add(new Tuple<int, string>(users[i].Id, users[i].Username));
+
+            return Ok(userIds);
+        }
+
         // POST: api/Users
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public ActionResult<User> Create([FromBody] User user)
         {
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
+            user.Password = hashedPassword;
             _repository.Create(user);
             return CreatedAtAction("GetById", new { id = user.Id }, user);
         }
@@ -102,69 +127,46 @@ namespace movie_recommendation.Controllers
         [HttpPost("authenticate")]
         public ActionResult<User> Authenticate([FromBody] User user)
         {
-            var user_status = _userRepository.Authenticate(user.Username, user.Password);
-            if (user_status == "Failed")
+            var userStatus = _userRepository.Authenticate(user.Username, user.Password);
+            if (userStatus == "Failed")
             {
                 return BadRequest(new { message = "Failed" });
             }
-            if (user_status == "User exists")
+            if (userStatus == "User exists")
             {
                 return BadRequest(new { message = "username exist" });
             }
 
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("My-Top-Secret-Password");
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                    {
-                        new Claim(ClaimTypes.Name, user.Id.ToString())
-                    }),
-                Expires = DateTime.UtcNow.AddMinutes(2),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
+            var tokenString = _userRepository.Token(user.Username);
 
             return Ok(new
             {
-                username = user.Username,
+                Username = user.Username,
                 password = user.Password,
                 Token = tokenString
             });
         }
 
-
+        [AllowAnonymous]
         [HttpPost("login")]
-        public ActionResult<User> Login([FromBody] User user)
+        public IActionResult Login([FromBody] User user)
         {
-            var user_log = _userRepository.Login(user.Username, user.Password);
-            if (user_log == null)
+            var userRegistered = _userRepository.Login(user.Username, user.Password);
+            if (userRegistered == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("My-Top-Secret-Password");
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddHours(6),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
+            var tokenString = _userRepository.Token(userRegistered.Username);
 
             return Ok(new
             {
-                Id = user_log.Id,
-                Username = user_log.Username,
+                Id = userRegistered.Id,
+                Username = userRegistered.Username,
                 Token = tokenString
             });
+
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public ActionResult<User> Update(int id, [FromBody] User user)
         {
@@ -175,7 +177,7 @@ namespace movie_recommendation.Controllers
             return Ok();
         }
 
-
+        [Authorize]
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public ActionResult<User> DeleteUser(int id)

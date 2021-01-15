@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ana\\Desktop\\NEW movie-recommendation\\project\\movie recommendation.csproj": {}
+    "C:\\Users\\home-pc\\Desktop\\movie-recommendation\\project\\movie recommendation.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ana\\Desktop\\NEW movie-recommendation\\project\\movie recommendation.csproj": {
+    "C:\\Users\\home-pc\\Desktop\\movie-recommendation\\project\\movie recommendation.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ana\\Desktop\\NEW movie-recommendation\\project\\movie recommendation.csproj",
+        "projectUniqueName": "C:\\Users\\home-pc\\Desktop\\movie-recommendation\\project\\movie recommendation.csproj",
         "projectName": "movie recommendation",
-        "projectPath": "C:\\Users\\ana\\Desktop\\NEW movie-recommendation\\project\\movie recommendation.csproj",
-        "packagesPath": "C:\\Users\\ana\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ana\\Desktop\\NEW movie-recommendation\\project\\obj\\",
+        "projectPath": "C:\\Users\\home-pc\\Desktop\\movie-recommendation\\project\\movie recommendation.csproj",
+        "packagesPath": "C:\\Users\\home-pc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\home-pc\\Desktop\\movie-recommendation\\project\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\ana\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\home-pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +29,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -38,8 +40,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.2, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[3.1.0, )"
@@ -99,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

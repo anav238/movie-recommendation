@@ -10,6 +10,7 @@ using movie_recommendation.Entities;
 
 namespace movie_recommendation.Controllers
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class MoviesController : ControllerBase
@@ -74,6 +75,17 @@ namespace movie_recommendation.Controllers
         public ActionResult<IEnumerable<Movie>> GetMoviesByGenre(string genre, int page = 1, int pageSize = 100)
         {   
             return _movieRepository.GetMoviesByGenre(genre, page, pageSize).ToList();
+        }
+
+        [HttpGet("search/{title}")]
+        public ActionResult<IEnumerable<Movie>> GetMoviesByTitle(string title, int page = 1, int pageSize = 100)
+        {
+            var movies =  _movieRepository.GetMoviesByTitle(title, page, pageSize).ToList();
+
+            if (movies.Count() == 0)
+                return NotFound();
+
+            return Ok(movies);
         }
 
 

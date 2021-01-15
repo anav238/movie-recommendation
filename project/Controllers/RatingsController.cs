@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using movie_recommendation.Data;
 using movie_recommendation.Entities;
 
 namespace movie_recommendation.Controllers
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class RatingsController : ControllerBase
@@ -40,10 +42,6 @@ namespace movie_recommendation.Controllers
 
             return rating;
         }
-
-       
-
-
 
         // POST: api/Ratings
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
