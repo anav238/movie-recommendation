@@ -289,6 +289,58 @@ if(window.location.pathname === "/" || window.location.pathname === "index.html"
 					});
 			}
 		});
+} else if(window.location.pathname === "/search.html") {
+	let searchBox = document.getElementById("search-box");
+	let moviesResults = document.querySelector("main section#movies ul");
+	let usersResults = document.querySelector("main section#users ul");
+	let messageBoxMovies = document.querySelector("main section#movies .description");
+	let messageBoxUsers = document.querySelector("main section#users .description");
+
+	searchBox.addEventListener("input", () => {
+		let term = searchBox.value.trim();
+		if(term.length) {
+			fetch("/api/v1/movies/search/" + term + "?pagesize=25", {
+				headers: {'Authorization': 'Bearer ' + token}
+			}).then(response => response.json()).then(data => {
+				moviesResults.innerHTML = "";
+				if(data.length) {
+					messageBoxMovies.innerHTML = data.length + " movies found";
+					for(let movie of data)
+						moviesResults.insertAdjacentHTML("beforeend", `
+							<li onclick="showMoviePopup(` + movie.id + `)">
+								<div class="title">
+									` + transformLocalTitle(movie.title) + `
+									<span class="year">(` + movie.title.slice(-5).slice(0, -1) + `)</span>
+								</div>
+								<div class="genres">` + movie.genres.replaceAll("|", ", ") + `</span>
+							</li>
+						`);
+				} else {
+					messageBoxMovies.innerHTML = "No movies found";
+				}
+			});
+			fetch("/api/v1/users/search/" + term + "?pagesize=25", {
+				headers: {'Authorization': 'Bearer ' + token}
+			}).then(response => response.json()).then(data => {
+				usersResults.innerHTML = "";
+				if(data.length) {
+					messageBoxUsers.innerHTML = data.length + " users found";
+					for(let user of data)
+						usersResults.insertAdjacentHTML("beforeend", "<li>" + user + "</li>");
+				}
+				else {
+					messageBoxUsers.innerHTML = "No users found";
+				}
+			});
+		}
+		else {
+			messageBoxMovies.innerHTML = "Results will appear as you type";
+			messageBoxUsers.innerHTML = "Results will appear as you type";
+
+			moviesResults.innerHTML = "";
+			usersResults.innerHTML = "";
+		}
+	});
 }
 
 function showMoviePopup(movieId) {
